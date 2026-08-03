@@ -1,4 +1,6 @@
-let earbatCorner = false;
+let finalClassification = "";
+let certificateID = "";
+let finalBoss = "";
 
 let username = "";
 
@@ -163,173 +165,8 @@ answers:[
 {text:"Leave",type:"chaos"}
 ]
 }
-
 ];
-
-function continueAssessment(){
-
-    username =
-    document.querySelector("input").value;
-
-    if(username.trim()===""){
-
-        document.querySelector(".card").innerHTML=`
-
-        <h1>BRED</h1>
-
-        <h2>Identification Failed</h2>
-
-        <p>BRED requires identification.</p>
-
-        <br>
-
-        <button onclick="location.reload()">
-        Try Again
-        </button>
-
-        `;
-
-        return;
-    }
-
-    document.querySelector(".card").innerHTML=`
-
-    <h1>BRED</h1>
-
-    <h2>Welcome, ${username}</h2>
-
-    <p>
-    BRED has acknowledged your existence.
-    </p>
-
-    <br>
-
-    <button onclick="beginAssessment()">
-    Begin Assessment
-    </button>
-
-    `;
-}
-
-function beginAssessment(){
-
-    currentQuestion = 0;
-
-    showQuestion();
-}
-
-function showQuestion(){
-
-    let q = questions[currentQuestion];
-
-    let progress =
-    ((currentQuestion+1)/29)*100;
-
-    let buttons = "";
-
-    q.answers.forEach(answer=>{
-
-        buttons += `
-
-        <button onclick="answerQuestion('${answer.type}')">
-        ${answer.text}
-        </button>
-
-        <br><br>
-
-        `;
-    });
-
-    document.querySelector(".card").innerHTML=`
-
-    <h1>BRED</h1>
-
-    <div class="progress-bar">
-        <div class="progress-fill"
-        style="width:${progress}%">
-        </div>
-    </div>
-
-    <br>
-
-    <h2>${q.question}</h2>
-
-    ${buttons}
-
-    `;
-}
-
-function answerQuestion(type){
-
-    scores[type]++;
-
-    currentQuestion++;
-
-    if(currentQuestion === 13){
-
-        document.querySelector(".card").innerHTML=`
-
-        <h1>BRED</h1>
-
-        <h2>NOTICE</h2>
-
-        <p>
-        The Earbat disagrees with answer #7.
-        </p>
-
-        <br>
-
-        <button onclick="continueAfterEarbat()">
-        Continue
-        </button>
-
-        `;
-
-        return;
-    }
-
-    if(currentQuestion >= questions.length){
-
-        showResults();
-        return;
-    }
-
-    showQuestion();
-}
-
-function continueAfterEarbat(){
-
-    spawnEarbat();
-
-    showQuestion();
-}
-
-function spawnEarbat(){
-
-    let earbat =
-    document.getElementById("earbat");
-
-    earbat.style.display = "block";
-
-    earbat.onclick = function(){
-
-        if(!earbatCorner){
-
-            earbat.style.top = "20px";
-            earbat.style.left = "20px";
-
-        }
-
-        else{
-
-            earbat.style.top = "80vh";
-            earbat.style.left = "80vw";
-
-        }
-
-        earbatCorner = !earbatCorner;
-    };
-}questions.push(
+questions.push(
 
 {
 question:"The refrigerator has filed paperwork.",
@@ -469,15 +306,163 @@ answers:[
 {text:"Report To BRED",type:"refrigerator"},
 {text:"BRO I HAVE NEWS",type:"chaos"}
 ]
+},
+
+{
+question:"Pick A Fight",
+answers:[
+{text:"BRED",type:"boss_bred"},
+{text:"Quantum Mango",type:"boss_mango"},
+{text:"Earbat",type:"boss_earbat"},
+{text:"Refrigerator",type:"boss_fridge"}
+]
 }
 
 );
 
-function showResults(){let earbat = document.getElementById("earbat");
+function continueAssessment(){
 
-if(earbat){
-    earbat.style.display = "none";
+    username =
+    document.querySelector("input").value;
+
+    if(username.trim()===""){
+
+        document.querySelector(".card").innerHTML = `
+
+        <h1>BRED</h1>
+
+        <h2>Identification Failed</h2>
+
+        <p>
+        BRED requires identification.
+        </p>
+
+        <br>
+
+        <button onclick="location.reload()">
+        Try Again
+        </button>
+
+        `;
+
+        return;
+    }
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>BRED</h1>
+
+    <h2>Welcome, ${username}</h2>
+
+    <p>
+    BRED has acknowledged your existence.
+    </p>
+
+    <br>
+
+    <button onclick="beginAssessment()">
+    Begin Assessment
+    </button>
+
+    `;
 }
+
+function beginAssessment(){
+
+    currentQuestion = 0;
+
+    showQuestion();
+}
+
+function showQuestion(){
+
+    let q =
+    questions[currentQuestion];
+
+    let progress =
+    ((currentQuestion+1) /
+    questions.length) * 100;
+
+    let buttons = "";
+
+    q.answers.forEach(answer=>{
+
+        buttons += `
+
+        <button
+        onclick="answerQuestion('${answer.type}')">
+
+        ${answer.text}
+
+        </button>
+
+        <br><br>
+
+        `;
+    });
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>BRED</h1>
+
+    <div class="progress-bar">
+
+        <div
+        class="progress-fill"
+        style="width:${progress}%">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>${q.question}</h2>
+
+    ${buttons}
+
+    `;
+}
+function answerQuestion(type){
+
+    if(type === "boss_bred"){
+        finalBoss = "BRED";
+    }
+
+    if(type === "boss_mango"){
+        finalBoss = "Quantum Mango";
+    }
+
+    if(type === "boss_earbat"){
+        finalBoss = "Earbat";
+    }
+
+    if(type === "boss_fridge"){
+        finalBoss = "Refrigerator";
+    }
+
+    if(
+        type !== "boss_bred" &&
+        type !== "boss_mango" &&
+        type !== "boss_earbat" &&
+        type !== "boss_fridge"
+    ){
+        scores[type]++;
+    }
+
+    currentQuestion++;
+
+    if(currentQuestion >= questions.length){
+
+        showResults();
+        return;
+
+    }
+
+    showQuestion();
+}
+
+function showResults(){
 
     let highest = "bread";
 
@@ -486,28 +471,34 @@ if(earbat){
         if(scores[key] > scores[highest]){
 
             highest = key;
+
         }
     }
 
-    let classification = "Bread Citizen";
+    finalClassification =
+    "Bread Citizen";
 
     if(highest==="mango")
-        classification="Quantum Mango Inspector";
+    finalClassification =
+    "Quantum Mango Inspector";
 
     if(highest==="earbat")
-        classification="Earbat Negotiator";
+    finalClassification =
+    "Earbat Negotiator";
 
     if(highest==="refrigerator")
-        classification="Refrigerator Mediator";
+    finalClassification =
+    "Refrigerator Mediator";
 
     if(
         scores.chaos >= 8 &&
         highest==="chaos"
     ){
-        classification="DIRECTOR OF BRED";
+        finalClassification =
+        "DIRECTOR OF BRED";
     }
 
-    let randomID =
+    certificateID =
     "BRED-" +
     Math.floor(
         10000 +
@@ -534,29 +525,28 @@ if(earbat){
 
     <p>
     <b>Classification:</b>
-    ${classification}
+    ${finalClassification}
     </p>
 
     <p>
     <b>Assessment ID:</b>
-    ${randomID}
+    ${certificateID}
     </p>
 
-   <p>
-<b>Earbat Status:</b>
+    <p>
+    <b>Final Confrontation:</b>
+    </p>
 
-<img
-src="earbat.png"
-style="
-width:170px;
-vertical-align:middle;
-margin-left:6px;
-margin-right:6px;
-">
+    <img
+    src="${getBossImage()}"
+    style="
+    width:90px;
+    margin-top:5px;
+    ">
 
-Still Disagrees
-
-</p>
+    <p>
+    ${finalBoss}
+    </p>
 
     <p>
     <b>Date:</b>
@@ -565,16 +555,80 @@ Still Disagrees
 
     <hr>
 
-    <p style="font-size:12px;opacity:0.7;">
+    <p
+    style="
+    font-size:12px;
+    opacity:0.7;
+    ">
     (JUST FOR NONSENSE:
     NOT TO BE TAKEN SERIOUSLY)
     </p>
 
     <br>
 
+    <button onclick="downloadCertificate()">
+    Download Certificate
+    </button>
+
+    <br><br>
+
     <button onclick="location.reload()">
     New Assessment
     </button>
 
     `;
+}
+
+function getBossImage(){
+
+    if(finalBoss==="BRED")
+    return "bred.png";
+
+    if(finalBoss==="Quantum Mango")
+    return "Quantum Mango.png";
+
+    if(finalBoss==="Earbat")
+    return "earbat.png";
+
+    return "Refrigerator.png";
+}
+
+function downloadCertificate(){
+
+    let text =
+
+`BRED OFFICIAL COMPATIBILITY REPORT
+
+Citizen:
+${username}
+
+Classification:
+${finalClassification}
+
+Assessment ID:
+${certificateID}
+
+Final Confrontation:
+${finalBoss}
+
+Generated By:
+BRED Assessment Portal`;
+
+    let blob =
+    new Blob(
+    [text],
+    {type:"text/plain"}
+    );
+
+    let link =
+    document.createElement("a");
+
+    link.href =
+    URL.createObjectURL(blob);
+
+    link.download =
+    username +
+    "_BRED_Certificate.txt";
+
+    link.click();
 }
