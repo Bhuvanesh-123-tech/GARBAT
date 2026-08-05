@@ -618,7 +618,7 @@ function getBossImage(){
 function downloadCertificate(){
 
     let certificate =
-    document.querySelector(".card");
+    document.getElementById("certificate");
 
     html2canvas(certificate).then(function(canvas){
 
