@@ -519,11 +519,24 @@ border:8px solid #4f8cff;
 text-align:center;
 ">
 
-    <h1>GARBAT</h1>
+ <h1 style="
+font-size:42px;
+margin-bottom:5px;
+">
+GARBAT
+</h1>
 
-    <h2>
-    OFFICIAL COMPATIBILITY REPORT
-    </h2>
+<p style="
+font-size:14px;
+letter-spacing:2px;
+margin-top:0;
+">
+Government Agency Ran By A Toaster
+</p>
+
+<h2>
+OFFICIAL COMPATIBILITY REPORT
+</h2>
 
     <hr>
 
