@@ -508,7 +508,16 @@ function showResults(){
     let today =
     new Date().toLocaleDateString();
 
-    document.querySelector(".card").innerHTML = `
+   document.querySelector(".card").innerHTML = `
+
+<div id="certificate" style="
+background:white;
+color:black;
+padding:30px;
+border-radius:15px;
+border:8px solid #4f8cff;
+text-align:center;
+">
 
     <h1>GARBAT</h1>
 
@@ -575,7 +584,7 @@ function showResults(){
     <button onclick="location.reload()">
     New Assessment
     </button>
-
+</div>
     `;
 }
 
