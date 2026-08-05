@@ -398,3 +398,206 @@ button:hover{
     transition:0.4s;
 
 }
+/* =========================
+   GARBAT CONTROL FRUIT DOMAIN
+   ========================= */
+
+body{
+
+    background:
+    radial-gradient(
+    circle at 15% 20%,
+    rgba(255,200,0,0.18),
+    transparent 25%
+    ),
+
+    radial-gradient(
+    circle at 80% 15%,
+    rgba(180,0,255,0.18),
+    transparent 25%
+    ),
+
+    radial-gradient(
+    circle at 20% 80%,
+    rgba(0,150,255,0.18),
+    transparent 25%
+    ),
+
+    radial-gradient(
+    circle at 80% 80%,
+    rgba(0,255,255,0.18),
+    transparent 25%
+    ),
+
+    #0b1020;
+
+    background-size:200% 200%;
+
+    animation:
+    domainShift 25s ease infinite;
+}
+
+/* MOVING DOMAIN */
+
+@keyframes domainShift{
+
+    0%{
+        background-position:
+        0% 50%;
+    }
+
+    50%{
+        background-position:
+        100% 50%;
+    }
+
+    100%{
+        background-position:
+        0% 50%;
+    }
+
+}
+
+/* GARBAT GRID */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+
+    linear-gradient(
+    rgba(79,140,255,.03) 1px,
+    transparent 1px
+    ),
+
+    linear-gradient(
+    90deg,
+    rgba(79,140,255,.03) 1px,
+    transparent 1px
+    );
+
+    background-size:
+    50px 50px;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+/* FLOATING SPECIES GLOW */
+
+.species{
+
+    opacity:0.22;
+
+    filter:
+    drop-shadow(
+    0 0 12px
+    rgba(255,255,255,.18)
+    );
+
+}
+
+/* GARBAT CARD */
+
+.card{
+
+    background:
+
+    linear-gradient(
+    180deg,
+    rgba(18,26,47,.96),
+    rgba(10,15,30,.96)
+    );
+
+    border:1px solid
+    rgba(79,140,255,.25);
+
+    backdrop-filter:
+    blur(10px);
+
+    box-shadow:
+
+    0 0 30px
+    rgba(0,0,0,.4),
+
+    0 0 80px
+    rgba(79,140,255,.18);
+
+    max-height:85vh;
+
+    overflow-y:auto;
+}
+
+/* GARBAT TITLE */
+
+h1{
+
+    text-shadow:
+
+    0 0 10px #4f8cff,
+
+    0 0 25px #4f8cff,
+
+    0 0 45px
+    rgba(79,140,255,.5);
+
+}
+
+/* BUTTONS */
+
+button{
+
+    box-shadow:
+
+    0 0 10px
+    rgba(59,130,246,.2);
+
+}
+
+button:hover{
+
+    box-shadow:
+
+    0 0 18px
+    rgba(59,130,246,.45);
+
+}
+
+/* PROGRESS BAR */
+
+.progress-fill{
+
+    box-shadow:
+
+    0 0 15px
+    rgba(59,130,246,.7);
+
+}
+
+/* SCROLLBAR */
+
+.card::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.card::-webkit-scrollbar-track{
+
+    background:#0b1020;
+
+}
+
+.card::-webkit-scrollbar-thumb{
+
+    background:#4f8cff;
+
+    border-radius:20px;
+
+}
