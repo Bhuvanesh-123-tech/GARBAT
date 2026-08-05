@@ -47,7 +47,7 @@ answers:[
 },
 
 {
-question:"Which BRED department would you join?",
+question:"Which GARBAT department would you join?",
 answers:[
 {text:"Bread Division",type:"bread"},
 {text:"Mango Division",type:"mango"},
