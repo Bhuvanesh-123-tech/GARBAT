@@ -5,7 +5,15 @@ let finalBoss = "";
 let username = "";
 
 let currentQuestion = 0;
+let reactionRound = 0;
+let reactionScore = 0;
 
+const reactionKeys = [
+"W",
+"A",
+"S",
+"D"
+];
 let scores = {
     bread: 0,
     mango: 0,
@@ -635,5 +643,144 @@ function downloadCertificate(){
         link.click();
 
     });
+
+}
+function startReactionTest(){
+
+    reactionRound = 1;
+    reactionScore = 0;
+
+    showReactionRound();
+
+}
+function showReactionRound(){
+
+    let correctKey =
+    reactionKeys[
+    Math.floor(
+    Math.random()*4
+    )
+    ];
+
+    window.currentCorrectKey =
+    correctKey;
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <h2>
+    Reaction Test
+    </h2>
+
+    <p>
+    Round ${reactionRound}/5
+    </p>
+
+    <br>
+
+    <div
+    id="reactionButtons"
+    style="
+    display:grid;
+    grid-template-columns:
+    1fr 1fr;
+    gap:15px;
+    "
+    >
+
+        <button
+        id="btnW"
+        onclick="reactionAnswer('W')">
+        W
+        </button>
+
+        <button
+        id="btnA"
+        onclick="reactionAnswer('A')">
+        A
+        </button>
+
+        <button
+        id="btnS"
+        onclick="reactionAnswer('S')">
+        S
+        </button>
+
+        <button
+        id="btnD"
+        onclick="reactionAnswer('D')">
+        D
+        </button>
+
+    </div>
+
+    `;
+
+    setTimeout(function(){
+
+        document
+        .getElementById(
+        "btn"+correctKey
+        )
+        .style.boxShadow =
+        "0 0 25px #00ffff";
+
+    },500);
+
+}function reactionAnswer(choice){
+
+    if(choice === currentCorrectKey){
+
+        reactionScore++;
+
+    }
+
+    reactionRound++;
+
+    if(reactionRound > 5){
+
+        finishReactionTest();
+        return;
+
+    }
+
+    showReactionRound();
+
+}
+function finishReactionTest(){
+
+    let result = "";
+
+    if(reactionScore >= 4){
+
+        result = "VICTORY";
+
+    }
+
+    else{
+
+        result = "DEFEAT";
+
+    }
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <h2>${result}</h2>
+
+    <p>
+    Score:
+    ${reactionScore}/5
+    </p>
+
+    <br>
+
+    <button onclick="location.reload()">
+    Return
+    </button>
+
+    `;
 
 }
