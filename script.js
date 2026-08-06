@@ -1,655 +1,439 @@
-let finalClassification = "";
-let certificateID = "";
-let finalBoss = "";
-
 let username = "";
 
 let currentQuestion = 0;
+
+let scores = {
+
+bread:0,
+mango:0,
+earbat:0,
+refrigerator:0,
+chaos:0
+
+};
+
+let finalClassification = "";
+let finalBoss = "";
+let certificateID = "";
+
+let selectedBoss = "";
+
 let reactionRound = 0;
 let reactionScore = 0;
+let reactionTimer = null;
+let currentCorrectKey = "";
 
 const reactionKeys = [
+
 "W",
 "A",
 "S",
 "D"
+
 ];
-let scores = {
-    bread: 0,
-    mango: 0,
-    earbat: 0,
-    refrigerator: 0,
-    chaos: 0
-};
 
 const questions = [
 
 {
-question:"Choose a bread.",
+question:"Choose a breakfast.",
+answers:[
+{text:"Toast",type:"bread"},
+{text:"Quantum Mango",type:"mango"},
+{text:"Bat Soup",type:"earbat"},
+{text:"Ice Cubes",type:"refrigerator"}
+]
+},
+
+{
+question:"Choose a hobby.",
+answers:[
+{text:"Baking Bread",type:"bread"},
+{text:"Quantum Research",type:"mango"},
+{text:"Listening To Wall Noises",type:"earbat"},
+{text:"Organising Refrigerators",type:"refrigerator"}
+]
+},
+
+{
+question:"Choose a weapon.",
+answers:[
+{text:"Bread Launcher",type:"bread"},
+{text:"Quantum Cannon",type:"mango"},
+{text:"Sonic Ear Screech",type:"earbat"},
+{text:"Frozen Refrigerator",type:"refrigerator"}
+]
+},
+
+{
+question:"Choose a vehicle.",
+answers:[
+{text:"Toastmobile",type:"bread"},
+{text:"Quantum Train",type:"mango"},
+{text:"Flying Earbat",type:"earbat"},
+{text:"Rolling Fridge",type:"refrigerator"}
+]
+},
+
+{
+question:"Which sounds most useful?",
+answers:[
+{text:"Infinite Bread",type:"bread"},
+{text:"Quantum Mango Engine",type:"mango"},
+{text:"Earbat Radar",type:"earbat"},
+{text:"Self Cooling Refrigerator",type:"refrigerator"}
+]
+},
+
+{
+question:"Press the weirdest option.",
+answers:[
+{text:"Bread",type:"bread"},
+{text:"Quantum Mango",type:"mango"},
+{text:"Earbat",type:"earbat"},
+{text:"Government Agency Ran By A Toaster",type:"chaos"}
+]
+},
+
+{
+question:"Choose A Bread.",
 answers:[
 {text:"White Bread",type:"bread"},
-{text:"Garlic Bread",type:"bread"},
-{text:"Baguette",type:"bread"},
-{text:"Unknown Bread",type:"chaos"}
+{text:"Quantum Mango Bread",type:"mango"},
+{text:"Earbat Bread",type:"earbat"},
+{text:"Frozen Bread",type:"refrigerator"}
 ]
 },
 
 {
-question:"Choose a transportation method.",
+question:"Choose A Place.",
 answers:[
-{text:"Car",type:"refrigerator"},
-{text:"Bus",type:"bread"},
+{text:"Bakery",type:"bread"},
+{text:"Laboratory",type:"mango"},
+{text:"Cave",type:"earbat"},
+{text:"Refrigerator Factory",type:"refrigerator"}
+]
+},
+
+{
+question:"Pick A Power.",
+answers:[
+{text:"Bread Multiplication",type:"bread"},
+{text:"Quantum Manipulation",type:"mango"},
+{text:"Ultra Hearing",type:"earbat"},
+{text:"Absolute Cooling",type:"refrigerator"}
+]
+},
+
+{
+question:"Pick A Pet.",
+answers:[
+{text:"Bread Dog",type:"bread"},
+{text:"Quantum Mango",type:"mango"},
 {text:"Earbat",type:"earbat"},
-{text:"Bicycle",type:"mango"}
-]
-},
-
-{
-question:"A mango knows your full name.",
-answers:[
-{text:"Trust It",type:"mango"},
-{text:"Ignore It",type:"bread"},
-{text:"Report It",type:"refrigerator"},
-{text:"Observe It",type:"earbat"}
-]
-},
-
-{
-question:"Which GARBAT department would you join?",
-answers:[
-{text:"Bread Division",type:"bread"},
-{text:"Mango Division",type:"mango"},
-{text:"Earbat Division",type:"earbat"},
-{text:"Refrigerator Division",type:"refrigerator"}
-]
-},
-
-{
-question:"You receive an unsigned loaf.",
-answers:[
-{text:"Accept",type:"bread"},
-{text:"Decline",type:"refrigerator"},
-{text:"Investigate",type:"earbat"},
-{text:"Report",type:"mango"}
-]
-},
-
-{
-question:"The refrigerator requests compensation.",
-answers:[
-{text:"Pay",type:"refrigerator"},
-{text:"Appeal",type:"bread"},
-{text:"Ignore",type:"chaos"},
-{text:"Become Bread",type:"bread"}
-]
-},
-
-{
-question:"Choose a witness.",
-answers:[
-{text:"Bread",type:"bread"},
-{text:"Mango",type:"mango"},
-{text:"Earbat",type:"earbat"},
-{text:"Refrigerator",type:"refrigerator"}
-]
-},
-
-{
-question:"You discover illegal toast.",
-answers:[
-{text:"Report It",type:"refrigerator"},
-{text:"Eat It",type:"bread"},
-{text:"Study It",type:"earbat"},
-{text:"Run",type:"chaos"}
-]
-},
-
-{
-question:"The mango waves.",
-answers:[
-{text:"Wave Back",type:"mango"},
-{text:"Hide",type:"bread"},
-{text:"Report It",type:"refrigerator"},
-{text:"Wave Harder",type:"chaos"}
-]
-},
-
-{
-question:"How many Earbats fit in a bus?",
-answers:[
-{text:"3",type:"bread"},
-{text:"12",type:"mango"},
-{text:"47",type:"earbat"},
-{text:"Ask GARBAT",type:"refrigerator"}
-]
-},
-
-{
-question:"The Earbat has reviewed your previous answer.",
-answers:[
-{text:"Acknowledge",type:"earbat"},
-{text:"Dispute",type:"refrigerator"},
-{text:"Ignore",type:"bread"},
-{text:"Panic",type:"chaos"}
-]
-},
-
-{
-question:"A refrigerator begins following you.",
-answers:[
-{text:"Run",type:"chaos"},
-{text:"Negotiate",type:"refrigerator"},
-{text:"Observe",type:"earbat"},
-{text:"Befriend",type:"bread"}
-]
-},
-
-{
-question:"GARBAT requests clarification.",
-answers:[
-{text:"Provide",type:"bread"},
-{text:"Refuse",type:"chaos"},
-{text:"Delay",type:"refrigerator"},
-{text:"Ask Why",type:"earbat"}
-]
-},
-
-{
-question:"Which item deserves protection?",
-answers:[
-{text:"Bread",type:"bread"},
-{text:"Mango",type:"mango"},
-{text:"Earbat",type:"earbat"},
-{text:"Refrigerator",type:"refrigerator"}
-]
-},
-
-{
-question:"The loaf is watching.",
-answers:[
-{text:"Continue",type:"bread"},
-{text:"Report",type:"refrigerator"},
-{text:"Watch Back",type:"earbat"},
-{text:"Leave",type:"chaos"}
-]
-}
-];
-questions.push(
-
-{
-question:"The refrigerator has filed paperwork.",
-answers:[
-{text:"Sign",type:"refrigerator"},
-{text:"Appeal",type:"bread"},
-{text:"Ignore",type:"chaos"},
-{text:"Eat The Paperwork",type:"earbat"}
-]
-},
-
-{
-question:"The mango remembers.",
-answers:[
-{text:"Good",type:"mango"},
-{text:"Concerning",type:"refrigerator"},
-{text:"Impossible",type:"bread"},
-{text:"Expected",type:"chaos"}
-]
-},
-
-{
-question:"The Earbat disagrees with answer #7.",
-answers:[
-{text:"Accept",type:"earbat"},
-{text:"Challenge",type:"refrigerator"},
-{text:"Explain",type:"bread"},
-{text:"Ask GARBAT",type:"chaos"}
-]
-},
-
-{
-question:"Choose your emergency contact.",
-answers:[
-{text:"Bread",type:"bread"},
-{text:"Mango",type:"mango"},
-{text:"Earbat",type:"earbat"},
-{text:"Refrigerator",type:"refrigerator"}
-]
-},
-
-{
-question:"An audit has been scheduled.",
-answers:[
-{text:"Prepare",type:"bread"},
-{text:"Hide",type:"chaos"},
-{text:"Appeal",type:"refrigerator"},
-{text:"Become Bread",type:"bread"}
-]
-},
-
-{
-question:"GARBAT has located previous records.",
-answers:[
-{text:"Continue",type:"bread"},
-{text:"Request Access",type:"earbat"},
-{text:"Deny",type:"refrigerator"},
-{text:"Panic",type:"chaos"}
-]
-},
-
-{
-question:"Your refrigerator has voted.",
-answers:[
-{text:"Accept",type:"refrigerator"},
-{text:"Recount",type:"earbat"},
-{text:"Ignore",type:"bread"},
-{text:"Investigate",type:"chaos"}
-]
-},
-
-{
-question:"Are you currently bread?",
-answers:[
-{text:"Yes",type:"bread"},
-{text:"No",type:"refrigerator"},
-{text:"Possibly",type:"earbat"},
-{text:"Classified",type:"chaos"}
-]
-},
-
-{
-question:"Choose a dimension.",
-answers:[
-{text:"Standard",type:"bread"},
-{text:"Mango",type:"mango"},
-{text:"Earbat",type:"earbat"},
-{text:"BRED",type:"chaos"}
-]
-},
-
-{
-question:"The loaf requires a decision.",
-answers:[
-{text:"Approve",type:"bread"},
-{text:"Reject",type:"refrigerator"},
-{text:"Delay",type:"chaos"},
-{text:"Delegate",type:"earbat"}
-]
-},
-
-{
-question:"The refrigerator has reached a verdict.",
-answers:[
-{text:"Accept",type:"refrigerator"},
-{text:"Appeal",type:"bread"},
-{text:"Ignore",type:"chaos"},
-{text:"Become Bread",type:"bread"}
-]
-},
-
-{
-question:"The mango has submitted evidence.",
-answers:[
-{text:"Review",type:"mango"},
-{text:"Reject",type:"refrigerator"},
-{text:"Archive",type:"bread"},
-{text:"Eat Evidence",type:"chaos"}
-]
-},
-
-{
-question:"Who authorized this assessment?",
-answers:[
-{text:"Me",type:"bread"},
-{text:"GARBAT",type:"chaos"},
-{text:"AREA-51",type:"chaos"},
-{text:"Unknown",type:"earbat"}
-]
-},
-
-{
-question:"BRO I HAVE NEWS.",
-answers:[
-{text:"Continue",type:"bread"},
-{text:"Panic",type:"chaos"},
-{text:"Report To GARBAT",type:"refrigerator"},
-{text:"BRO I HAVE NEWS",type:"chaos"}
-]
-},
-
-{
-question:"Pick A Fight",
-answers:[
-{text:"BRED",type:"boss_bred"},
-{text:"Quantum Mango",type:"boss_mango"},
-{text:"Earbat",type:"boss_earbat"},
-{text:"Refrigerator",type:"boss_fridge"}
+{text:"Mini Fridge",type:"refrigerator"}
 ]
 }
 
-);
+];function continueAssessment(){
 
-function continueAssessment(){
+    let input =
+    document.getElementById(
+    "usernameInput"
+    );
 
     username =
-    document.querySelector("input").value;
+    input.value.trim();
 
-    if(username.trim()===""){
+    if(username === ""){
 
-        document.querySelector(".card").innerHTML = `
-
-        <h1>GARBAT</h1>
-
-        <h2>Identification Failed</h2>
-
-        <p>
-        GARBAT requires identification.
-        </p>
-
-        <br>
-
-        <button onclick="location.reload()">
-        Try Again
-        </button>
-
-        `;
+        alert(
+        "Enter your name first."
+        );
 
         return;
+
     }
 
-    document.querySelector(".card").innerHTML = `
+    beginAssessment();
 
-    <h1>GARBAT</h1>
-
-    <h2>Welcome, ${username}</h2>
-
-    <p>
-    GARBAT has acknowledged your existence.
-    </p>
-
-    <br>
-
-    <button onclick="beginAssessment()">
-    Begin Assessment
-    </button>
-
-    `;
 }
 
 function beginAssessment(){
 
     currentQuestion = 0;
 
+    scores = {
+
+    bread:0,
+    mango:0,
+    earbat:0,
+    refrigerator:0,
+    chaos:0
+
+    };
+
     showQuestion();
+
 }
 
 function showQuestion(){
 
     let q =
-    questions[currentQuestion];
+    questions[
+    currentQuestion
+    ];
 
-    let progress =
-    ((currentQuestion+1) /
-    questions.length) * 100;
+    let answersHTML = "";
 
-    let buttons = "";
+    q.answers.forEach(answer => {
 
-    q.answers.forEach(answer=>{
-
-        buttons += `
+        answersHTML += `
 
         <button
-        onclick="answerQuestion('${answer.type}')">
-
+        onclick="
+        answerQuestion(
+        '${answer.type}'
+        )
+        ">
         ${answer.text}
-
         </button>
 
         <br><br>
 
         `;
+
     });
 
-    document.querySelector(".card").innerHTML = `
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
 
-    <h1>GARBAT</h1>
+    <h1>
+    GARBAT
+    </h1>
 
-    <div class="progress-bar">
+    <p>
+    Question
+    ${currentQuestion+1}
+    /
+    ${questions.length}
+    </p>
 
-        <div
-        class="progress-fill"
-        style="width:${progress}%">
-
-        </div>
-
-    </div>
+    <h2>
+    ${q.question}
+    </h2>
 
     <br>
 
-    <h2>${q.question}</h2>
-
-    ${buttons}
+    ${answersHTML}
 
     `;
+
 }
+
 function answerQuestion(type){
 
-    if(type === "boss_bred"){
-        finalBoss = "BRED";
-    }
-
-    if(type === "boss_mango"){
-        finalBoss = "Quantum Mango";
-    }
-
-    if(type === "boss_earbat"){
-        finalBoss = "Earbat";
-    }
-
-    if(type === "boss_fridge"){
-        finalBoss = "Refrigerator";
-    }
-
     if(
-        type !== "boss_bred" &&
-        type !== "boss_mango" &&
-        type !== "boss_earbat" &&
-        type !== "boss_fridge"
+    scores[type]
+    !== undefined
     ){
+
         scores[type]++;
+
     }
 
     currentQuestion++;
 
-    if(currentQuestion >= questions.length){
+    if(
 
-        showResults();
+    currentQuestion >=
+    questions.length
+
+    ){
+
+        showBossSelection();
         return;
 
     }
 
     showQuestion();
+
 }
 
-function showResults(){
+function showBossSelection(){
 
-    let highest = "bread";
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
 
-    for(let key in scores){
+    <h1>
+    GARBAT
+    </h1>
 
-        if(scores[key] > scores[highest]){
-
-            highest = key;
-
-        }
-    }
-
-    finalClassification =
-    "Bread Citizen";
-
-    if(highest==="mango")
-    finalClassification =
-    "Quantum Mango Inspector";
-
-    if(highest==="earbat")
-    finalClassification =
-    "Earbat Negotiator";
-
-    if(highest==="refrigerator")
-    finalClassification =
-    "Refrigerator Mediator";
-
-    if(
-        scores.chaos >= 8 &&
-        highest==="chaos"
-    ){
-        finalClassification =
-        "DIRECTOR OF BRED";
-    }
-
-    certificateID =
-    "GARBAT-" +
-    Math.floor(
-        10000 +
-        Math.random()*90000
-    );
-
-    let today =
-    new Date().toLocaleDateString();
-
-   document.querySelector(".card").innerHTML = `
-
-<div id="certificate" style="
-background:white;
-color:black;
-padding:30px;
-border-radius:15px;
-border:8px solid #4f8cff;
-text-align:center;
-">
-
- <h1 style="
-font-size:42px;
-margin-bottom:5px;
-">
-GARBAT
-</h1>
-
-<p style="
-font-size:14px;
-letter-spacing:2px;
-margin-top:0;
-">
-Government Agency Ran By A Toaster
-</p>
-
-<h2>
-OFFICIAL COMPATIBILITY REPORT
-</h2>
-
-    <hr>
-
-    <p>
-    <b>Citizen:</b>
-    ${username}
-    </p>
-
-    <p>
-    <b>Classification:</b>
-    ${finalClassification}
-    </p>
-
-    <p>
-    <b>Assessment ID:</b>
-    ${certificateID}
-    </p>
-
-    <p>
-    <b>Final Confrontation:</b>
-    </p>
-
-    <img
-    src="${getBossImage()}"
-    style="
-    width:90px;
-    margin-top:5px;
-    ">
-
-    <p>
-    ${finalBoss}
-    </p>
-
-    <p>
-    <b>Date:</b>
-    ${today}
-    </p>
-
-    <hr>
-
-    <p
-    style="
-    font-size:12px;
-    opacity:0.7;
-    ">
-    (JUST FOR NONSENSE:
-    NOT TO BE TAKEN SERIOUSLY)
-    </p>
+    <h2>
+    Pick A Fight
+    </h2>
 
     <br>
 
-    <button onclick="downloadCertificate()">
-    Download Certificate
+    <button
+    onclick="
+    selectBoss(
+    'BRED'
+    )
+    ">
+    BRED
     </button>
-<br><br>
 
-<button onclick="startReactionTest()">
-TEST REACTION GAME
-</button>
     <br><br>
 
-    <button onclick="location.reload()">
-    New Assessment
+    <button
+    onclick="
+    selectBoss(
+    'Quantum Mango'
+    )
+    ">
+    Quantum Mango
     </button>
-</div>
+
+    <br><br>
+
+    <button
+    onclick="
+    selectBoss(
+    'Earbat'
+    )
+    ">
+    Earbat
+    </button>
+
+    <br><br>
+
+    <button
+    onclick="
+    selectBoss(
+    'Refrigerator'
+    )
+    ">
+    Refrigerator
+    </button>
+
     `;
-}
-
-function getBossImage(){
-
-    if(finalBoss==="BRED")
-    return "bred.png";
-
-    if(finalBoss==="Quantum Mango")
-    return "Quantum Mango.png";
-
-    if(finalBoss==="Earbat")
-    return "earbat.png";
-
-    return "Refrigerator.png";
-}
-
-function downloadCertificate(){
-
-    let certificate =
-    document.getElementById("certificate");
-
-    html2canvas(certificate).then(function(canvas){
-
-        let link =
-        document.createElement("a");
-
-        link.download =
-        username +
-        "_GARBAT_Certificate.png";
-
-        link.href =
-        canvas.toDataURL("image/png");
-
-        link.click();
-
-    });
 
 }
-function startReactionTest(){
+
+function selectBoss(boss){
+
+    selectedBoss = boss;
+    finalBoss = boss;
+
+    chooseBossMinigame();
+
+}
+
+function chooseBossMinigame(){
+
+    if(selectedBoss === "BRED"){
+
+        let roll =
+        Math.random();
+
+        if(roll < 0.50){
+
+            startReactionTest();
+
+        }
+
+        else if(roll < 0.75){
+
+            startMathQuiz();
+
+        }
+
+        else{
+
+            startDodgeGame();
+
+        }
+
+    }
+
+    else if(
+    selectedBoss ===
+    "Quantum Mango"
+    ){
+
+        let roll =
+        Math.random();
+
+        if(roll < 0.25){
+
+            startReactionTest();
+
+        }
+
+        else if(roll < 0.75){
+
+            startMathQuiz();
+
+        }
+
+        else{
+
+            startDodgeGame();
+
+        }
+
+    }
+
+    else if(
+    selectedBoss ===
+    "Earbat"
+    ){
+
+        let roll =
+        Math.random();
+
+        if(roll < 0.50){
+
+            startReactionTest();
+
+        }
+
+        else{
+
+            startDodgeGame();
+
+        }
+
+    }
+
+    else{
+
+        let roll =
+        Math.random();
+
+        if(roll < 0.33){
+
+            startReactionTest();
+
+        }
+
+        else if(roll < 0.66){
+
+            startMathQuiz();
+
+        }
+
+        else{
+
+            startDodgeGame();
+
+        }
+
+    }
+
+}function startReactionTest(){
 
     reactionRound = 1;
     reactionScore = 0;
@@ -657,19 +441,24 @@ function startReactionTest(){
     showReactionRound();
 
 }
+
 function showReactionRound(){
 
-    let correctKey =
+    clearTimeout(
+    reactionTimer
+    );
+
+    currentCorrectKey =
+
     reactionKeys[
     Math.floor(
     Math.random()*4
     )
     ];
 
-    window.currentCorrectKey =
-    correctKey;
-
-    document.querySelector(".card").innerHTML = `
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
 
     <h1>GARBAT</h1>
 
@@ -678,13 +467,18 @@ function showReactionRound(){
     </h2>
 
     <p>
-    Round ${reactionRound}/5
+    Round
+    ${reactionRound}/5
+    </p>
+
+    <p>
+    Score:
+    ${reactionScore}
     </p>
 
     <br>
 
     <div
-    id="reactionButtons"
     style="
     display:grid;
     grid-template-columns:
@@ -693,29 +487,29 @@ function showReactionRound(){
     "
     >
 
-        <button
-        id="btnW"
-        onclick="reactionAnswer('W')">
-        W
-        </button>
+    <button
+    id="btnW"
+    onclick="reactionAnswer('W')">
+    W
+    </button>
 
-        <button
-        id="btnA"
-        onclick="reactionAnswer('A')">
-        A
-        </button>
+    <button
+    id="btnA"
+    onclick="reactionAnswer('A')">
+    A
+    </button>
 
-        <button
-        id="btnS"
-        onclick="reactionAnswer('S')">
-        S
-        </button>
+    <button
+    id="btnS"
+    onclick="reactionAnswer('S')">
+    S
+    </button>
 
-        <button
-        id="btnD"
-        onclick="reactionAnswer('D')">
-        D
-        </button>
+    <button
+    id="btnD"
+    onclick="reactionAnswer('D')">
+    D
+    </button>
 
     </div>
 
@@ -725,16 +519,21 @@ function showReactionRound(){
 
         document
         .getElementById(
-        "btn"+correctKey
+        "btn"+currentCorrectKey
         )
         .style.boxShadow =
-        "0 0 25px #00ffff";
+        "0 0 30px cyan";
 
     },500);
 
-}function reactionAnswer(choice){
+}
 
-    if(choice === currentCorrectKey){
+function reactionAnswer(choice){
+
+    if(
+    choice ===
+    currentCorrectKey
+    ){
 
         reactionScore++;
 
@@ -742,9 +541,14 @@ function showReactionRound(){
 
     reactionRound++;
 
-    if(reactionRound > 5){
+    if(
+    reactionRound > 5
+    ){
 
-        finishReactionTest();
+        finishFight(
+        reactionScore >= 4
+        );
+
         return;
 
     }
@@ -752,39 +556,254 @@ function showReactionRound(){
     showReactionRound();
 
 }
-function finishReactionTest(){
 
-    let result = "";
+function startMathQuiz(){
 
-    if(reactionScore >= 4){
+    let a =
+    Math.floor(
+    Math.random()*20
+    )+1;
 
-        result = "VICTORY";
+    let b =
+    Math.floor(
+    Math.random()*20
+    )+1;
 
-    }
+    let answer =
+    a+b;
 
-    else{
+    let user =
+    prompt(
+    `${a} + ${b} = ?`
+    );
 
-        result = "DEFEAT";
+    finishFight(
+    Number(user)
+    === answer
+    );
 
-    }
+}
 
-    document.querySelector(".card").innerHTML = `
+function startDodgeGame(){
+
+    let success =
+    Math.random() > 0.4;
+
+    finishFight(
+    success
+    );
+
+}
+
+function finishFight(win){
+
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
 
     <h1>GARBAT</h1>
 
-    <h2>${result}</h2>
+    <h2>
+
+    ${
+    win
+    ?
+    "VICTORY"
+    :
+    "DEFEAT"
+    }
+
+    </h2>
 
     <p>
-    Score:
-    ${reactionScore}/5
+
+    ${
+    win
+    ?
+    "Boss Defeated"
+    :
+    "Boss Survived"
+    }
+
     </p>
 
     <br>
 
-    <button onclick="location.reload()">
-    Return
+    <button
+    onclick="
+    showResults()
+    ">
+    Continue
     </button>
 
     `;
+
+}
+
+function showResults(){
+
+    let highest =
+    "bread";
+
+    for(
+    let key
+    in scores
+    ){
+
+        if(
+        scores[key]
+        >
+        scores[highest]
+        ){
+
+            highest =
+            key;
+
+        }
+
+    }
+
+    finalClassification =
+    "Bread Citizen";
+
+    if(
+    highest ===
+    "mango"
+    ){
+
+        finalClassification =
+        "Quantum Mango Inspector";
+
+    }
+
+    if(
+    highest ===
+    "earbat"
+    ){
+
+        finalClassification =
+        "Earbat Negotiator";
+
+    }
+
+    if(
+    highest ===
+    "refrigerator"
+    ){
+
+        finalClassification =
+        "Refrigerator Mediator";
+
+    }
+
+    certificateID =
+
+    "GARBAT-" +
+
+    Math.floor(
+    10000+
+    Math.random()*90000
+    );
+
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
+
+    <h1>
+    GARBAT
+    </h1>
+
+    <h2>
+    Compatibility Report
+    </h2>
+
+    <p>
+    Citizen:
+    ${username}
+    </p>
+
+    <p>
+    Classification:
+    ${finalClassification}
+    </p>
+
+    <p>
+    Boss:
+    ${finalBoss}
+    </p>
+
+    <p>
+    ID:
+    ${certificateID}
+    </p>
+
+    <br>
+
+    <button
+    onclick="
+    downloadCertificate()
+    ">
+    Download Certificate
+    </button>
+
+    <br><br>
+
+    <button
+    onclick="
+    location.reload()
+    ">
+    New Assessment
+    </button>
+
+    `;
+
+}
+
+function downloadCertificate(){
+
+    let text =
+
+`GARBAT OFFICIAL REPORT
+
+Citizen:
+${username}
+
+Classification:
+${finalClassification}
+
+Boss:
+${finalBoss}
+
+ID:
+${certificateID}
+
+Government Agency Ran By A Toaster`;
+
+    let blob =
+    new Blob(
+    [text],
+    {
+    type:
+    "text/plain"
+    }
+    );
+
+    let link =
+    document.createElement(
+    "a"
+    );
+
+    link.href =
+    URL.createObjectURL(
+    blob
+    );
+
+    link.download =
+
+    username +
+
+    "_GARBAT_Report.txt";
+
+    link.click();
 
 }
