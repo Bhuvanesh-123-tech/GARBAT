@@ -1,25 +1,17 @@
 let finalClassification = "";
 let certificateID = "";
-let finalBoss = "";
-
 let username = "";
 
 let currentQuestion = 0;
-let reactionRound = 0;
-let reactionScore = 0;
 
-const reactionKeys = [
-"W",
-"A",
-"S",
-"D"
-];
 let scores = {
-    bread: 0,
-    mango: 0,
-    earbat: 0,
-    refrigerator: 0,
-    chaos: 0
+
+    bread:0,
+    mango:0,
+    earbat:0,
+    refrigerator:0,
+    chaos:0
+
 };
 
 const questions = [
@@ -122,7 +114,115 @@ answers:[
 {text:"47",type:"earbat"},
 {text:"Ask GARBAT",type:"refrigerator"}
 ]
-},
+}
+
+];
+
+function continueAssessment(){
+
+    username =
+    document.querySelector("input").value;
+
+    if(username.trim()===""){
+
+        alert(
+        "Identification Required"
+        );
+
+        return;
+
+    }
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <h2>
+    Welcome, ${username}
+    </h2>
+
+    <p>
+    GARBAT acknowledges your existence.
+    </p>
+
+    <br>
+
+    <button onclick="beginAssessment()">
+    Begin Assessment
+    </button>
+
+    `;
+
+}
+
+function beginAssessment(){
+
+    currentQuestion = 0;
+
+    showQuestion();
+
+}
+
+function showQuestion(){
+
+    let q =
+    questions[currentQuestion];
+
+    let progress =
+    ((currentQuestion + 1) /
+    questions.length) * 100;
+
+    let remaining =
+    questions.length -
+    (currentQuestion + 1);
+
+    let buttons = "";
+
+    q.answers.forEach(answer=>{
+
+        buttons += `
+
+        <button
+        onclick="answerQuestion('${answer.type}')">
+
+        ${answer.text}
+
+        </button>
+
+        <br><br>
+
+        `;
+
+    });
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <p>
+    ${remaining} Remaining
+    </p>
+
+    <div class="progress-bar">
+
+        <div
+        class="progress-fill"
+        style="width:${progress}%">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>${q.question}</h2>
+
+    ${buttons}
+
+    `;
+
+}
+questions.push(
 
 {
 question:"The Earbat has reviewed your previous answer.",
@@ -172,17 +272,15 @@ answers:[
 {text:"Watch Back",type:"earbat"},
 {text:"Leave",type:"chaos"}
 ]
-}
-];
-questions.push(
+},
 
 {
-question:"The refrigerator has filed paperwork.",
+question:"GARBAT offers unlimited bread.",
 answers:[
-{text:"Sign",type:"refrigerator"},
-{text:"Appeal",type:"bread"},
-{text:"Ignore",type:"chaos"},
-{text:"Eat The Paperwork",type:"earbat"}
+{text:"Accept",type:"bread"},
+{text:"Question The Offer",type:"earbat"},
+{text:"Request Documentation",type:"refrigerator"},
+{text:"Demand Mangoes",type:"mango"}
 ]
 },
 
@@ -197,12 +295,12 @@ answers:[
 },
 
 {
-question:"The Earbat disagrees with answer #7.",
+question:"The Earbat requests diplomacy.",
 answers:[
-{text:"Accept",type:"earbat"},
-{text:"Challenge",type:"refrigerator"},
-{text:"Explain",type:"bread"},
-{text:"Ask GARBAT",type:"chaos"}
+{text:"Negotiate",type:"earbat"},
+{text:"Observe",type:"bread"},
+{text:"Escalate",type:"refrigerator"},
+{text:"Become Earbat",type:"chaos"}
 ]
 },
 
@@ -224,7 +322,31 @@ answers:[
 {text:"Appeal",type:"refrigerator"},
 {text:"Become Bread",type:"bread"}
 ]
-},
+}
+
+);
+
+function answerQuestion(type){
+
+    scores[type]++;
+
+    currentQuestion++;
+
+    if(
+    currentQuestion >=
+    questions.length
+    ){
+
+        showResults();
+
+        return;
+
+    }
+
+    showQuestion();
+
+}
+questions.push(
 
 {
 question:"GARBAT has located previous records.",
@@ -317,157 +439,33 @@ answers:[
 },
 
 {
-question:"Pick A Fight",
+question:"Who truly controls GARBAT?",
 answers:[
-{text:"BRED",type:"boss_bred"},
-{text:"Quantum Mango",type:"boss_mango"},
-{text:"Earbat",type:"boss_earbat"},
-{text:"Refrigerator",type:"boss_fridge"}
+{text:"The Bread",type:"bread"},
+{text:"The Mango",type:"mango"},
+{text:"The Earbat",type:"earbat"},
+{text:"Nobody Knows",type:"chaos"}
 ]
 }
 
 );
 
-function continueAssessment(){
+function getSpeciesImage(){
 
-    username =
-    document.querySelector("input").value;
+    if(finalClassification==="Bread Citizen")
+    return "bred.png";
 
-    if(username.trim()===""){
+    if(finalClassification==="Quantum Mango Inspector")
+    return "Quantum Mango.png";
 
-        document.querySelector(".card").innerHTML = `
+    if(finalClassification==="Earbat Negotiator")
+    return "earbat.png";
 
-        <h1>GARBAT</h1>
+    if(finalClassification==="Refrigerator Mediator")
+    return "Refrigerator.png";
 
-        <h2>Identification Failed</h2>
+    return "director.png";
 
-        <p>
-        GARBAT requires identification.
-        </p>
-
-        <br>
-
-        <button onclick="location.reload()">
-        Try Again
-        </button>
-
-        `;
-
-        return;
-    }
-
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
-
-    <h2>Welcome, ${username}</h2>
-
-    <p>
-    GARBAT has acknowledged your existence.
-    </p>
-
-    <br>
-
-    <button onclick="beginAssessment()">
-    Begin Assessment
-    </button>
-
-    `;
-}
-
-function beginAssessment(){
-
-    currentQuestion = 0;
-
-    showQuestion();
-}
-
-function showQuestion(){
-
-    let q =
-    questions[currentQuestion];
-
-    let progress =
-    ((currentQuestion+1) /
-    questions.length) * 100;
-
-    let buttons = "";
-
-    q.answers.forEach(answer=>{
-
-        buttons += `
-
-        <button
-        onclick="answerQuestion('${answer.type}')">
-
-        ${answer.text}
-
-        </button>
-
-        <br><br>
-
-        `;
-    });
-
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
-
-    <div class="progress-bar">
-
-        <div
-        class="progress-fill"
-        style="width:${progress}%">
-
-        </div>
-
-    </div>
-
-    <br>
-
-    <h2>${q.question}</h2>
-
-    ${buttons}
-
-    `;
-}
-function answerQuestion(type){
-
-    if(type === "boss_bred"){
-        finalBoss = "BRED";
-    }
-
-    if(type === "boss_mango"){
-        finalBoss = "Quantum Mango";
-    }
-
-    if(type === "boss_earbat"){
-        finalBoss = "Earbat";
-    }
-
-    if(type === "boss_fridge"){
-        finalBoss = "Refrigerator";
-    }
-
-    if(
-        type !== "boss_bred" &&
-        type !== "boss_mango" &&
-        type !== "boss_earbat" &&
-        type !== "boss_fridge"
-    ){
-        scores[type]++;
-    }
-
-    currentQuestion++;
-
-    if(currentQuestion >= questions.length){
-
-        showResults();
-        return;
-
-    }
-
-    showQuestion();
 }
 
 function showResults(){
@@ -476,77 +474,107 @@ function showResults(){
 
     for(let key in scores){
 
-        if(scores[key] > scores[highest]){
+        if(
+        scores[key] >
+        scores[highest]
+        ){
 
             highest = key;
 
         }
+
     }
 
-    finalClassification =
-    "Bread Citizen";
-
-    if(highest==="mango")
-    finalClassification =
-    "Quantum Mango Inspector";
-
-    if(highest==="earbat")
-    finalClassification =
-    "Earbat Negotiator";
-
-    if(highest==="refrigerator")
-    finalClassification =
-    "Refrigerator Mediator";
-
     if(
-        scores.chaos >= 8 &&
-        highest==="chaos"
+    scores.chaos >= 8
     ){
+
         finalClassification =
-        "DIRECTOR OF BRED";
+        "Director of GARBAT";
+
+    }
+
+    else if(
+    highest==="bread"
+    ){
+
+        finalClassification =
+        "Bread Citizen";
+
+    }
+
+    else if(
+    highest==="mango"
+    ){
+
+        finalClassification =
+        "Quantum Mango Inspector";
+
+    }
+
+    else if(
+    highest==="earbat"
+    ){
+
+        finalClassification =
+        "Earbat Negotiator";
+
+    }
+
+    else{
+
+        finalClassification =
+        "Refrigerator Mediator";
+
     }
 
     certificateID =
     "GARBAT-" +
     Math.floor(
-        10000 +
-        Math.random()*90000
+    10000 +
+    Math.random()*90000
     );
 
     let today =
-    new Date().toLocaleDateString();
+    new Date()
+    .toLocaleDateString();
 
-   document.querySelector(".card").innerHTML = `
+    document.querySelector(".card").innerHTML = `
 
-<div id="certificate" style="
-background:white;
-color:black;
-padding:30px;
-border-radius:15px;
-border:8px solid #4f8cff;
-text-align:center;
-">
+    <div
+    id="certificate"
+    style="
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    border:8px solid #4f8cff;
+    ">
 
- <h1 style="
-font-size:42px;
-margin-bottom:5px;
-">
-GARBAT
-</h1>
+    <h1>
+    GARBAT
+    </h1>
 
-<p style="
-font-size:14px;
-letter-spacing:2px;
-margin-top:0;
-">
-Government Agency Ran By A Toaster
-</p>
-
-<h2>
-OFFICIAL COMPATIBILITY REPORT
-</h2>
+    <p>
+    Government Agency Ran By A Toaster
+    </p>
 
     <hr>
+
+    <h2>
+    Official Compatibility Certificate
+    </h2>
+
+    <br>
+
+    <img
+    src="${getSpeciesImage()}"
+    style="
+    width:160px;
+    ">
+
+    <br><br>
 
     <p>
     <b>Citizen:</b>
@@ -559,23 +587,8 @@ OFFICIAL COMPATIBILITY REPORT
     </p>
 
     <p>
-    <b>Assessment ID:</b>
+    <b>ID:</b>
     ${certificateID}
-    </p>
-
-    <p>
-    <b>Final Confrontation:</b>
-    </p>
-
-    <img
-    src="${getBossImage()}"
-    style="
-    width:90px;
-    margin-top:5px;
-    ">
-
-    <p>
-    ${finalBoss}
     </p>
 
     <p>
@@ -585,206 +598,82 @@ OFFICIAL COMPATIBILITY REPORT
 
     <hr>
 
-    <p
-    style="
-    font-size:12px;
-    opacity:0.7;
-    ">
-    (JUST FOR NONSENSE:
-    NOT TO BE TAKEN SERIOUSLY)
-    </p>
+    ${
+    finalClassification===
+    "Director of GARBAT"
 
-    <br>
+    ?
 
-    <button onclick="downloadCertificate()">
-    Download Certificate
-    </button>
-<br><br>
-
-<button onclick="startReactionTest()">
-TEST REACTION GAME
-</button>
-    <br><br>
-
-    <button onclick="location.reload()">
-    New Assessment
-    </button>
-</div>
-    `;
-}
-
-function getBossImage(){
-
-    if(finalBoss==="BRED")
-    return "bred.png";
-
-    if(finalBoss==="Quantum Mango")
-    return "Quantum Mango.png";
-
-    if(finalBoss==="Earbat")
-    return "earbat.png";
-
-    return "Refrigerator.png";
-}
-
-function downloadCertificate(){
-
-    let certificate =
-    document.getElementById("certificate");
-
-    html2canvas(certificate).then(function(canvas){
-
-        let link =
-        document.createElement("a");
-
-        link.download =
-        username +
-        "_GARBAT_Certificate.png";
-
-        link.href =
-        canvas.toDataURL("image/png");
-
-        link.click();
-
-    });
-
-}
-function startReactionTest(){
-
-    reactionRound = 1;
-    reactionScore = 0;
-
-    showReactionRound();
-
-}
-function showReactionRound(){
-
-    let correctKey =
-    reactionKeys[
-    Math.floor(
-    Math.random()*4
-    )
-    ];
-
-    window.currentCorrectKey =
-    correctKey;
-
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
+    `
 
     <h2>
-    Reaction Test
+    ★★★★★
     </h2>
 
     <p>
-    Round ${reactionRound}/5
+    HOMO GARBATICUS PRIME
     </p>
+
+    <p>
+    TOO POWERFUL FOR
+    CLASSIFICATION
+    </p>
+
+    `
+
+    :
+
+    ""
+
+    }
 
     <br>
 
-    <div
-    id="reactionButtons"
-    style="
-    display:grid;
-    grid-template-columns:
-    1fr 1fr;
-    gap:15px;
-    "
-    >
+    <button
+    onclick="downloadCertificate()">
+    Download Certificate
+    </button>
 
-        <button
-        id="btnW"
-        onclick="reactionAnswer('W')">
-        W
-        </button>
+    <br><br>
 
-        <button
-        id="btnA"
-        onclick="reactionAnswer('A')">
-        A
-        </button>
-
-        <button
-        id="btnS"
-        onclick="reactionAnswer('S')">
-        S
-        </button>
-
-        <button
-        id="btnD"
-        onclick="reactionAnswer('D')">
-        D
-        </button>
+    <button
+    onclick="location.reload()">
+    New Assessment
+    </button>
 
     </div>
 
     `;
 
-    setTimeout(function(){
-
-        document
-        .getElementById(
-        "btn"+correctKey
-        )
-        .style.boxShadow =
-        "0 0 25px #00ffff";
-
-    },500);
-
-}function reactionAnswer(choice){
-
-    if(choice === currentCorrectKey){
-
-        reactionScore++;
-
-    }
-
-    reactionRound++;
-
-    if(reactionRound > 5){
-
-        finishReactionTest();
-        return;
-
-    }
-
-    showReactionRound();
-
 }
-function finishReactionTest(){
 
-    let result = "";
+function downloadCertificate(){
 
-    if(reactionScore >= 4){
+    let certificate =
+    document.getElementById(
+    "certificate"
+    );
 
-        result = "VICTORY";
+    html2canvas(
+    certificate
+    ).then(function(canvas){
 
-    }
+        let link =
+        document.createElement(
+        "a"
+        );
 
-    else{
+        link.download =
+        username +
+        "_GARBAT.png";
 
-        result = "DEFEAT";
+        link.href =
+        canvas.toDataURL(
+        "image/png"
+        );
 
-    }
+        link.click();
 
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
-
-    <h2>${result}</h2>
-
-    <p>
-    Score:
-    ${reactionScore}/5
-    </p>
-
-    <br>
-
-    <button onclick="location.reload()">
-    Return
-    </button>
-
-    `;
+    });
 
 }
