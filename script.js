@@ -651,3 +651,52 @@ function reactionAnswer(choice){
     showReactionRound();
 
 }
+function finishFight(victory){
+
+    if(victory){
+
+        gameWin = true;
+
+    }else{
+
+        gameWin = false;
+
+    }
+
+    showResults();
+
+}
+function showResults(){
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <h2>
+    Assessment Complete
+    </h2>
+
+    <p>
+    Citizen:
+    ${username}
+    </p>
+
+    <p>
+    Boss:
+    ${finalBoss}
+    </p>
+
+    <p>
+    Result:
+    ${gameWin ? "VICTORY" : "DEFEAT"}
+    </p>
+
+    <br>
+
+    <button onclick="location.reload()">
+    New Assessment
+    </button>
+
+    `;
+
+}
