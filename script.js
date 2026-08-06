@@ -736,13 +736,76 @@ function reactionAnswer(choice){
 
 function startMangoInspection(){
 
-    let answer =
-    prompt(
-    "MANGO INSPECTION\n\n12 + 17 = ?"
+    let suspicious =
+    Math.floor(
+    Math.random()*4
     );
 
+    window.correctMango =
+    suspicious;
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>
+    MANGO INSPECTION
+    </h1>
+
+    <p>
+    Identify the suspicious mango.
+    </p>
+
+    <br>
+
+    <div style="
+    display:grid;
+    grid-template-columns:
+    1fr 1fr;
+    gap:15px;
+    ">
+
+    <button
+    onclick="chooseMango(0)">
+    🥭
+    </button>
+
+    <button
+    onclick="chooseMango(1)">
+    🥭
+    </button>
+
+    <button
+    onclick="chooseMango(2)">
+    🥭
+    </button>
+
+    <button
+    onclick="chooseMango(3)">
+    🥭
+    </button>
+
+    </div>
+
+    `;
+
+    setTimeout(function(){
+
+        let buttons =
+        document.querySelectorAll(
+        ".card button"
+        );
+
+        buttons[
+        suspicious
+        ].innerHTML =
+        "🥭👁️";
+
+    },1000);
+
+}
+function chooseMango(choice){
+
     finishFight(
-    Number(answer) === 29
+    choice===correctMango
     );
 
 }
