@@ -599,7 +599,11 @@ OFFICIAL COMPATIBILITY REPORT
     <button onclick="downloadCertificate()">
     Download Certificate
     </button>
+<br><br>
 
+<button onclick="startReactionTest()">
+TEST REACTION GAME
+</button>
     <br><br>
 
     <button onclick="location.reload()">
