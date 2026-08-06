@@ -484,9 +484,12 @@ function answerQuestion(type){
 
 }
 
+let bossResult = "";
+
 function startBossFight(){
 
-    let roll = Math.random();
+    let roll =
+    Math.random();
 
     if(finalBoss==="BRED"){
 
@@ -545,6 +548,29 @@ function startBossFight(){
     }
 
 }
+
+function finishFight(victory){
+
+    if(victory){
+
+        bossResult =
+        "VICTORY";
+
+    }
+
+    else{
+
+        bossResult =
+        "DEFEAT";
+
+    }
+
+    showResults();
+
+}
+let reactionTimer;
+let currentCorrectKey;
+
 function startReactionTest(){
 
     reactionRound = 1;
@@ -558,7 +584,9 @@ function showReactionRound(){
 
     let correctKey =
     reactionKeys[
-    Math.floor(Math.random()*4)
+    Math.floor(
+    Math.random()*4
+    )
     ];
 
     currentCorrectKey =
@@ -566,23 +594,48 @@ function showReactionRound(){
 
     document.querySelector(".card").innerHTML = `
 
-    <h1>Reaction Test</h1>
+    <h1>REACTION TEST</h1>
 
     <p>
     Round ${reactionRound}/5
+    </p>
+
+    <p>
+    Click the highlighted key
+    before time runs out.
     </p>
 
     <h2 id="target">
     ?
     </h2>
 
-    <button onclick="reactionAnswer('W')">W</button>
-    <button onclick="reactionAnswer('A')">A</button>
+    <br>
+
+    <button
+    id="btnW"
+    onclick="reactionAnswer('W')">
+    W
+    </button>
+
+    <button
+    id="btnA"
+    onclick="reactionAnswer('A')">
+    A
+    </button>
 
     <br><br>
 
-    <button onclick="reactionAnswer('S')">S</button>
-    <button onclick="reactionAnswer('D')">D</button>
+    <button
+    id="btnS"
+    onclick="reactionAnswer('S')">
+    S
+    </button>
+
+    <button
+    id="btnD"
+    onclick="reactionAnswer('D')">
+    D
+    </button>
 
     `;
 
@@ -593,12 +646,21 @@ function showReactionRound(){
         .innerText =
         correctKey;
 
+        document
+        .getElementById(
+        "btn"+correctKey
+        )
+        .style.boxShadow =
+        "0 0 25px cyan";
+
     },500);
 
     reactionTimer =
     setTimeout(function(){
 
-        reactionAnswer("TIMEOUT");
+        reactionAnswer(
+        "TIMEOUT"
+        );
 
     },2500);
 
@@ -618,7 +680,9 @@ function(e){
     key==="D"
     ){
 
-        reactionAnswer(key);
+        reactionAnswer(
+        key
+        );
 
     }
 
@@ -630,7 +694,10 @@ function reactionAnswer(choice){
     reactionTimer
     );
 
-    if(choice===currentCorrectKey){
+    if(
+    choice===
+    currentCorrectKey
+    ){
 
         reactionScore++;
 
@@ -638,10 +705,12 @@ function reactionAnswer(choice){
 
     reactionRound++;
 
-    if(reactionRound>5){
+    if(
+    reactionRound > 5
+    ){
 
         finishFight(
-        reactionScore>=4
+        reactionScore >= 4
         );
 
         return;
@@ -650,52 +719,184 @@ function reactionAnswer(choice){
 
     showReactionRound();
 
+}function startBreadEscape(){
+
+    let answer =
+    prompt(
+    "BREAD ESCAPE\n\nType:\nTOAST"
+    );
+
+    finishFight(
+    answer &&
+    answer.toUpperCase()
+    === "TOAST"
+    );
+
 }
-function finishFight(victory){
 
-    if(victory){
+function startMangoInspection(){
 
-        gameWin = true;
+    let answer =
+    prompt(
+    "MANGO INSPECTION\n\n12 + 17 = ?"
+    );
 
-    }else{
+    finishFight(
+    Number(answer) === 29
+    );
 
-        gameWin = false;
+}
+
+function startEarbatAmbush(){
+
+    let answer =
+    prompt(
+    "EARBAT AMBUSH\n\nType:\nEARBAT"
+    );
+
+    finishFight(
+    answer &&
+    answer.toUpperCase()
+    === "EARBAT"
+    );
+
+}
+
+function startFridgeShutdown(){
+
+    let answer =
+    prompt(
+    "REFRIGERATOR SHUTDOWN\n\n8 × 7 = ?"
+    );
+
+    finishFight(
+    Number(answer) === 56
+    );
+
+}
+
+function showResults(){
+
+    let highest =
+    "bread";
+
+    for(let key in scores){
+
+        if(
+        scores[key] >
+        scores[highest]
+        ){
+
+            highest =
+            key;
+
+        }
 
     }
 
-    showResults();
+    finalClassification =
+    "Bread Citizen";
 
-}
-function showResults(){
+    if(
+    highest==="mango"
+    ){
 
-    document.querySelector(".card").innerHTML = `
+        finalClassification =
+        "Quantum Mango Inspector";
+
+    }
+
+    if(
+    highest==="earbat"
+    ){
+
+        finalClassification =
+        "Earbat Negotiator";
+
+    }
+
+    if(
+    highest==="refrigerator"
+    ){
+
+        finalClassification =
+        "Refrigerator Mediator";
+
+    }
+
+    if(
+    scores.chaos >= 8 &&
+    highest==="chaos"
+    ){
+
+        finalClassification =
+        "DIRECTOR OF BRED";
+
+    }
+
+    certificateID =
+    "GARBAT-" +
+    Math.floor(
+    10000 +
+    Math.random()*90000
+    );
+
+    let today =
+    new Date()
+    .toLocaleDateString();
+
+    document.querySelector(
+    ".card"
+    ).innerHTML = `
+
+    <div id="certificate">
 
     <h1>GARBAT</h1>
 
     <h2>
-    Assessment Complete
+    OFFICIAL REPORT
     </h2>
 
+    <hr>
+
     <p>
-    Citizen:
+    <b>Citizen:</b>
     ${username}
     </p>
 
     <p>
-    Boss:
+    <b>Classification:</b>
+    ${finalClassification}
+    </p>
+
+    <p>
+    <b>Boss:</b>
     ${finalBoss}
     </p>
 
     <p>
-    Result:
-    ${gameWin ? "VICTORY" : "DEFEAT"}
+    <b>Result:</b>
+    ${bossResult}
     </p>
 
-    <br>
+    <p>
+    <b>ID:</b>
+    ${certificateID}
+    </p>
 
-    <button onclick="location.reload()">
+    <p>
+    <b>Date:</b>
+    ${today}
+    </p>
+
+    <hr>
+
+    <button
+    onclick="location.reload()">
     New Assessment
     </button>
+
+    </div>
 
     `;
 
