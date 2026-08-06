@@ -59,10 +59,14 @@ href="style.css">
     GARBAT Build 5.0
 </p>
 
-     <input
+ <input
 type="text"
 placeholder="Enter Name"
-id="usernameInput">
+onkeydown="
+if(event.key==='Enter'){
+continueAssessment();
+}
+">
 
         <button
         onclick="continueAssessment()">
