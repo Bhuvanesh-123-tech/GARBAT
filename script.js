@@ -464,7 +464,7 @@ function getSpeciesImage(){
     if(finalClassification==="Refrigerator Mediator")
     return "Refrigerator.png";
 
-    return "director.png";
+    return "GIGANIGGA.png";
 
 }
 
