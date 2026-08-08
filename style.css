@@ -601,3 +601,100 @@ button:hover{
     border-radius:20px;
 
 }
+.certificate{
+
+    position:relative;
+
+    background:white;
+
+    color:black;
+
+    padding:40px;
+
+    border:8px solid #caa95c;
+
+    border-radius:12px;
+
+}
+
+.cert-header{
+
+    text-align:center;
+
+}
+
+.cert-species{
+
+    width:180px;
+
+    display:block;
+
+    margin:auto;
+
+}
+
+.cert-rank{
+
+    text-align:center;
+
+    color:#204080;
+
+}
+
+.cert-text{
+
+    text-align:center;
+
+    line-height:1.6;
+
+}
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+.cert-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+.signature{
+
+    margin-top:20px;
+
+    text-align:left;
+
+}
+
+.stamp{
+
+    position:absolute;
+
+    right:25px;
+
+    bottom:25px;
+
+    border:4px solid red;
+
+    color:red;
+
+    padding:10px;
+
+    font-weight:bold;
+
+    transform:rotate(-15deg);
+
+    font-size:24px;
+
+}
