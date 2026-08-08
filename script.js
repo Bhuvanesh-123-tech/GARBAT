@@ -463,7 +463,8 @@ function getSpeciesImage(){
 
     if(finalClassification==="Refrigerator Mediator")
     return "Refrigerator.png";
-
+    
+ if(finalClassification==="Director of GARBAT")
     return "GIGANIGGA.png";
 
 }
