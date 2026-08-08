@@ -1,16 +1,17 @@
 let finalClassification = "";
 let certificateID = "";
+
 let username = "";
 
 let currentQuestion = 0;
 
 let scores = {
 
-    bread:0,
-    mango:0,
-    earbat:0,
-    refrigerator:0,
-    chaos:0
+bread:0,
+mango:0,
+earbat:0,
+refrigerator:0,
+chaos:0
 
 };
 
@@ -117,111 +118,6 @@ answers:[
 }
 
 ];
-
-function continueAssessment(){
-
-    username =
-    document.querySelector("input").value;
-
-    if(username.trim()===""){
-
-        alert(
-        "Identification Required"
-        );
-
-        return;
-
-    }
-
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
-
-    <h2>
-    Welcome, ${username}
-    </h2>
-
-    <p>
-    GARBAT acknowledges your existence.
-    </p>
-
-    <br>
-
-    <button onclick="beginAssessment()">
-    Begin Assessment
-    </button>
-
-    `;
-
-}
-
-function beginAssessment(){
-
-    currentQuestion = 0;
-
-    showQuestion();
-
-}
-
-function showQuestion(){
-
-    let q =
-    questions[currentQuestion];
-
-    let progress =
-    ((currentQuestion + 1) /
-    questions.length) * 100;
-
-    let remaining =
-    questions.length -
-    (currentQuestion + 1);
-
-    let buttons = "";
-
-    q.answers.forEach(answer=>{
-
-        buttons += `
-
-        <button
-        onclick="answerQuestion('${answer.type}')">
-
-        ${answer.text}
-
-        </button>
-
-        <br><br>
-
-        `;
-
-    });
-
-    document.querySelector(".card").innerHTML = `
-
-    <h1>GARBAT</h1>
-
-    <p>
-    ${remaining} Remaining
-    </p>
-
-    <div class="progress-bar">
-
-        <div
-        class="progress-fill"
-        style="width:${progress}%">
-
-        </div>
-
-    </div>
-
-    <br>
-
-    <h2>${q.question}</h2>
-
-    ${buttons}
-
-    `;
-
-}
 questions.push(
 
 {
@@ -275,12 +171,12 @@ answers:[
 },
 
 {
-question:"GARBAT offers unlimited bread.",
+question:"The refrigerator has filed paperwork.",
 answers:[
-{text:"Accept",type:"bread"},
-{text:"Question The Offer",type:"earbat"},
-{text:"Request Documentation",type:"refrigerator"},
-{text:"Demand Mangoes",type:"mango"}
+{text:"Sign",type:"refrigerator"},
+{text:"Appeal",type:"bread"},
+{text:"Ignore",type:"chaos"},
+{text:"Eat The Paperwork",type:"earbat"}
 ]
 },
 
@@ -295,12 +191,12 @@ answers:[
 },
 
 {
-question:"The Earbat requests diplomacy.",
+question:"The Earbat disagrees with answer #7.",
 answers:[
-{text:"Negotiate",type:"earbat"},
-{text:"Observe",type:"bread"},
-{text:"Escalate",type:"refrigerator"},
-{text:"Become Earbat",type:"chaos"}
+{text:"Accept",type:"earbat"},
+{text:"Challenge",type:"refrigerator"},
+{text:"Explain",type:"bread"},
+{text:"Ask GARBAT",type:"chaos"}
 ]
 },
 
@@ -326,22 +222,71 @@ answers:[
 
 );
 
-function answerQuestion(type){
+function shuffleArray(array){
 
-    scores[type]++;
-
-    currentQuestion++;
-
-    if(
-    currentQuestion >=
-    questions.length
+    for(
+    let i=array.length-1;
+    i>0;
+    i--
     ){
 
-        showResults();
+        let j =
+        Math.floor(
+        Math.random()*
+        (i+1)
+        );
+
+        [array[i],array[j]] =
+        [array[j],array[i]];
+
+    }
+
+}
+
+function continueAssessment(){
+
+    username =
+    document.querySelector("input").value;
+
+    if(username.trim()===""){
+
+        alert(
+        "Identification Required"
+        );
 
         return;
 
     }
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <h2>
+    Welcome, ${username}
+    </h2>
+
+    <p>
+    GARBAT acknowledges your existence.
+    </p>
+
+    <br>
+
+    <button onclick="beginAssessment()">
+    Begin Assessment
+    </button>
+
+    `;
+
+}
+
+function beginAssessment(){
+
+    shuffleArray(
+    questions
+    );
+
+    currentQuestion = 0;
 
     showQuestion();
 
@@ -450,6 +395,91 @@ answers:[
 
 );
 
+function showQuestion(){
+
+    let q =
+    questions[currentQuestion];
+
+    shuffleArray(
+    q.answers
+    );
+
+    let progress =
+    ((currentQuestion+1)
+    /questions.length)*100;
+
+    let remaining =
+    questions.length-
+    (currentQuestion+1);
+
+    let buttons = "";
+
+    q.answers.forEach(answer=>{
+
+        buttons += `
+
+        <button
+        onclick="answerQuestion('${answer.type}')">
+
+        ${answer.text}
+
+        </button>
+
+        <br><br>
+
+        `;
+
+    });
+
+    document.querySelector(".card").innerHTML = `
+
+    <h1>GARBAT</h1>
+
+    <p>
+    ${remaining} Remaining
+    </p>
+
+    <div class="progress-bar">
+
+        <div
+        class="progress-fill"
+        style="width:${progress}%">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <h2>${q.question}</h2>
+
+    ${buttons}
+
+    `;
+
+}
+
+function answerQuestion(type){
+
+    scores[type]++;
+
+    currentQuestion++;
+
+    if(
+    currentQuestion >=
+    questions.length
+    ){
+
+        showResults();
+
+        return;
+
+    }
+
+    showQuestion();
+
+}
+
 function getSpeciesImage(){
 
     if(finalClassification==="Bread Citizen")
@@ -464,7 +494,7 @@ function getSpeciesImage(){
     if(finalClassification==="Refrigerator Mediator")
     return "Refrigerator.png";
     
- if(finalClassification==="Director of GARBAT")
+    if(finalClassification==="Director of GARBAT")
     return "GIGANIGGA.png";
 
 }
@@ -486,36 +516,28 @@ function showResults(){
 
     }
 
-    if(
-    scores.chaos >= 8
-    ){
+    if(scores.chaos >= 8){
 
         finalClassification =
         "Director of GARBAT";
 
     }
 
-    else if(
-    highest==="bread"
-    ){
+    else if(highest==="bread"){
 
         finalClassification =
         "Bread Citizen";
 
     }
 
-    else if(
-    highest==="mango"
-    ){
+    else if(highest==="mango"){
 
         finalClassification =
         "Quantum Mango Inspector";
 
     }
 
-    else if(
-    highest==="earbat"
-    ){
+    else if(highest==="earbat"){
 
         finalClassification =
         "Earbat Negotiator";
@@ -536,44 +558,21 @@ function showResults(){
     Math.random()*90000
     );
 
-    let today =
-    new Date()
-    .toLocaleDateString();
-
     document.querySelector(".card").innerHTML = `
 
-    <div
-    id="certificate"
-    style="
-    background:white;
-    color:black;
-    padding:30px;
-    border-radius:20px;
-    text-align:center;
-    border:8px solid #4f8cff;
-    ">
+    <div id="certificate">
 
-    <h1>
-    GARBAT
-    </h1>
-
-    <p>
-    Government Agency Ran By A Toaster
-    </p>
-
-    <hr>
+    <h1>GARBAT</h1>
 
     <h2>
     Official Compatibility Certificate
     </h2>
 
-    <br>
+    <hr>
 
     <img
     src="${getSpeciesImage()}"
-    style="
-    width:160px;
-    ">
+    style="width:180px;">
 
     <br><br>
 
@@ -592,54 +591,22 @@ function showResults(){
     ${certificateID}
     </p>
 
-    <p>
-    <b>Date:</b>
-    ${today}
-    </p>
-
-    <hr>
-
-    ${
-    finalClassification===
-    "Director of GARBAT"
-
-    ?
-
-    `
-
-    <h2>
-    ★★★★★
-    </h2>
-
-    <p>
-    HOMO GARBATICUS PRIME
-    </p>
-
-    <p>
-    TOO POWERFUL FOR
-    CLASSIFICATION
-    </p>
-
-    `
-
-    :
-
-    ""
-
-    }
-
     <br>
 
     <button
     onclick="downloadCertificate()">
+
     Download Certificate
+
     </button>
 
     <br><br>
 
     <button
     onclick="location.reload()">
+
     New Assessment
+
     </button>
 
     </div>
