@@ -601,7 +601,7 @@ document.querySelector(".card").innerHTML = `
 
     <b>${finalClassification}</b>
 
-    within the Control Fruit Domain.
+.
 
     </p>
 
