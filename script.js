@@ -557,62 +557,133 @@ function showResults(){
     10000 +
     Math.random()*90000
     );
+document.querySelector(".card").innerHTML = `
 
-    document.querySelector(".card").innerHTML = `
+<div id="certificate" class="certificate">
 
-    <div id="certificate">
+    <div class="cert-header">
 
-    <h1>GARBAT</h1>
+        <h1>GARBAT</h1>
 
-    <h2>
-    Official Compatibility Certificate
-    </h2>
+        <h3>
+        Government Agency Ran By A Toaster
+        </h3>
+
+        <p>
+        Official Certification Document
+        </p>
+
+    </div>
 
     <hr>
 
     <img
     src="${getSpeciesImage()}"
-    style="width:180px;">
+    class="cert-species">
 
-    <br><br>
+    <h2 class="cert-rank">
 
-    <p>
-    <b>Citizen:</b>
-    ${username}
-    </p>
-
-    <p>
-    <b>Classification:</b>
     ${finalClassification}
+
+    </h2>
+
+    <p class="cert-text">
+
+    This certifies that
+
+    <b>${username}</b>
+
+    has successfully completed the
+
+    GARBAT Compatibility Assessment
+
+    and has been assigned the rank of
+
+    <b>${finalClassification}</b>
+
+    within the Control Fruit Domain.
+
     </p>
 
-    <p>
-    <b>ID:</b>
-    ${certificateID}
-    </p>
+    <div class="stats">
 
-    <br>
-
-    <button
-    onclick="downloadCertificate()">
-
-    Download Certificate
-
-    </button>
-
-    <br><br>
-
-    <button
-    onclick="location.reload()">
-
-    New Assessment
-
-    </button>
+        <p>Bread: ${scores.bread}</p>
+        <p>Mango: ${scores.mango}</p>
+        <p>Earbat: ${scores.earbat}</p>
+        <p>Refrigerator: ${scores.refrigerator}</p>
+        <p>Chaos: ${scores.chaos}</p>
 
     </div>
 
-    `;
+    <hr>
 
+    <div class="cert-footer">
+
+        <div>
+
+            <p>ID</p>
+
+            <b>${certificateID}</b>
+
+        </div>
+
+        <div>
+
+            <p>Date</p>
+
+            <b>
+            ${new Date().toLocaleDateString()}
+            </b>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="signature">
+
+        ___________________
+
+        <br>
+
+        Toaster Prime
+
+        <br>
+
+        Supreme Director
+
+        <br>
+
+        GARBAT Headquarters
+
+    </div>
+
+    <div class="stamp">
+
+        APPROVED
+
+    </div>
+
+</div>
+
+<br>
+
+<button onclick="downloadCertificate()">
+
+Download Certificate
+
+</button>
+
+<br><br>
+
+<button onclick="location.reload()">
+
+New Assessment
+
+</button>
+
+`;
 }
 
 function downloadCertificate(){
