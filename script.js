@@ -557,83 +557,126 @@ function showResults(){
     10000 +
     Math.random()*90000
     );
-document.querySelector(".card").innerHTML = `
 
-<div id="certificate" class="certificate">
+    document.querySelector(".card").innerHTML = `
 
-    <div class="cert-header">
+    <div id="certificate" class="certificate">
 
-        <h1>GARBAT</h1>
+        <div class="cert-header">
 
-        <h3>
-        Government Agency Ran By A Toaster
-        </h3>
+            <h1>GARBAT</h1>
 
-        <p>
-        Official Certification Document
-        </p>
+            <h3>
+            Government Agency Ran By A Toaster
+            </h3>
 
-    </div>
-
-    <hr>
-
-    <img
-    src="${getSpeciesImage()}"
-    class="cert-species">
-
-    <h2 class="cert-rank">
-
-    ${finalClassification}
-
-    </h2>
-
-    <p class="cert-text">
-
-    This certifies that
-
-    <b>${username}</b>
-
-    has successfully completed the
-
-    GARBAT Compatibility Assessment
-
-    and has been assigned the rank of
-
-    <b>${finalClassification}</b>
-
-.
-
-    </p>
-
-    <div class="stats">
-
-        <p>Bread: ${scores.bread}</p>
-        <p>Mango: ${scores.mango}</p>
-        <p>Earbat: ${scores.earbat}</p>
-        <p>Refrigerator: ${scores.refrigerator}</p>
-        <p>Chaos: ${scores.chaos}</p>
-
-    </div>
-
-    <hr>
-
-    <div class="cert-footer">
-
-        <div>
-
-            <p>ID</p>
-
-            <b>${certificateID}</b>
+            <p>
+            Official Certification Document
+            </p>
 
         </div>
 
-        <div>
+        <hr>
 
-            <p>Date</p>
+        <img
+        src="${getSpeciesImage()}"
+        class="cert-species">
 
-            <b>
-            ${new Date().toLocaleDateString()}
-            </b>
+        <h2 class="cert-rank">
+
+        ${finalClassification}
+
+        </h2>
+
+        ${
+        finalClassification==="Director of GARBAT"
+        ?
+
+        `
+        <h3>
+
+        ★★★★★
+
+        <br>
+
+        HOMO GARBATICUS PRIME
+
+        <br>
+
+        TOO POWERFUL FOR CLASSIFICATION
+
+        </h3>
+        `
+
+        :
+
+        ""
+
+        }
+
+        <p class="cert-text">
+
+        This certifies that
+
+        <b>${username}</b>
+
+        has successfully completed the
+
+        GARBAT Compatibility Assessment
+
+        and has been assigned the rank of
+
+        <b>${finalClassification}</b>.
+
+        </p>
+
+        <div class="stats">
+
+            <p>Bread: ${scores.bread}</p>
+            <p>Mango: ${scores.mango}</p>
+            <p>Earbat: ${scores.earbat}</p>
+            <p>Refrigerator: ${scores.refrigerator}</p>
+            <p>Chaos: ${scores.chaos}</p>
+
+        </div>
+
+        <hr>
+
+        <div class="cert-footer">
+
+            <div>
+
+                <p>ID</p>
+
+                <b>${certificateID}</b>
+
+            </div>
+
+            <div>
+
+                <p>Date</p>
+
+                <b>
+                ${new Date().toLocaleDateString()}
+                </b>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="signature">
+
+            <img
+            src="signature.png"
+            class="autograph">
+
+        </div>
+
+        <div class="stamp">
+
+            APPROVED
 
         </div>
 
@@ -641,51 +684,25 @@ document.querySelector(".card").innerHTML = `
 
     <br>
 
-    <div class="signature">
+    <button
+    onclick="downloadCertificate()">
 
-        ___________________
+    Download Certificate
 
-        <br>
+    </button>
 
-        Toaster Prime
+    <br><br>
 
-        <br>
+    <button
+    onclick="location.reload()">
 
-        Supreme Director
+    New Assessment
 
-        <br>
+    </button>
 
-        GARBAT Headquarters
+    `;
 
-    </div>
-
-    <div class="stamp">
-
-        APPROVED
-
-    </div>
-
-</div>
-
-<br>
-
-<button onclick="downloadCertificate()">
-
-Download Certificate
-
-</button>
-
-<br><br>
-
-<button onclick="location.reload()">
-
-New Assessment
-
-</button>
-
-`;
 }
-
 function downloadCertificate(){
 
     let certificate =
