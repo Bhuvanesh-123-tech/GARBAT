@@ -493,9 +493,11 @@ function getSpeciesImage(){
 
     if(finalClassification==="Refrigerator Mediator")
     return "Refrigerator.png";
-    
+
     if(finalClassification==="Director of GARBAT")
     return "GIGANIGGA.png";
+
+  
 
 }
 
@@ -516,10 +518,69 @@ function showResults(){
 
     }
 
-    if(scores.chaos >= 8){
+    let topScores = [];
 
+    for(let key in scores){
+
+        if(
+        scores[key] ===
+        scores[highest]
+        ){
+
+            topScores.push(key);
+
+        }
+
+    }
+
+    if(topScores.length > 1){
+
+        let combo =
+        topScores.sort().join("-");
+
+        if(combo==="bread-chaos")
         finalClassification =
-        "Director of GARBAT";
+        "The Forbidden Loaf";
+
+        else if(combo==="bread-earbat")
+        finalClassification =
+        "Toast Whisperer";
+
+        else if(combo==="bread-mango")
+        finalClassification =
+        "Fruit Sandwich";
+
+        else if(combo==="bread-refrigerator")
+        finalClassification =
+        "Certified Breakfast";
+
+        else if(combo==="chaos-earbat")
+        finalClassification =
+        "Reality Auditor";
+
+        else if(combo==="chaos-mango")
+        finalClassification =
+        "Unstable Produce";
+
+        else if(combo==="chaos-refrigerator")
+        finalClassification =
+        "Cooling System Failure";
+
+        else if(combo==="earbat-mango")
+        finalClassification =
+        "Quantum Observer";
+
+        else if(combo==="earbat-refrigerator")
+        finalClassification =
+        "Thermal Negotiator";
+
+        else if(combo==="mango-refrigerator")
+        finalClassification =
+        "Frozen Mango Incident";
+
+        else
+        finalClassification =
+        "Unknown GARBAT Entity";
 
     }
 
@@ -544,10 +605,17 @@ function showResults(){
 
     }
 
-    else{
+    else if(highest==="refrigerator"){
 
         finalClassification =
         "Refrigerator Mediator";
+
+    }
+
+    else{
+
+        finalClassification =
+        "Director of GARBAT";
 
     }
 
@@ -557,7 +625,6 @@ function showResults(){
     10000 +
     Math.random()*90000
     );
-
     document.querySelector(".card").innerHTML = `
 
     <div id="certificate" class="certificate">
@@ -578,10 +645,27 @@ function showResults(){
 
         <hr>
 
-        <img
-        src="${getSpeciesImage()}"
-        class="cert-species">
+      ${
+finalClassification.includes("Citizen") ||
+finalClassification.includes("Inspector") ||
+finalClassification.includes("Negotiator") ||
+finalClassification.includes("Mediator") ||
+finalClassification==="Director of GARBAT"
 
+?
+
+`<img
+src="${getSpeciesImage()}"
+class="cert-species">`
+
+:
+
+`<div class="secret-classification">
+
+⚠ CLASSIFIED ENTITY ⚠
+
+</div>`
+}
         <h2 class="cert-rank">
 
         ${finalClassification}
@@ -667,8 +751,6 @@ function showResults(){
         <br>
 
         <div class="signature">
-
-            <div class="signature">
 
     <img
     src="signature.png"
