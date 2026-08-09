@@ -668,11 +668,25 @@ function showResults(){
 
         <div class="signature">
 
-            <img
-            src="signature.png"
-            class="autograph">
+            <div class="signature">
 
-        </div>
+    <img
+    src="signature.png"
+    class="autograph">
+
+    <br>
+
+    Toaster Prime
+
+    <br>
+
+    Supreme Director
+
+    <br>
+
+    GARBAT Headquarters
+
+</div>
 
         <div class="stamp">
 
