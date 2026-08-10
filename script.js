@@ -482,27 +482,60 @@ function answerQuestion(type){
 
 function getSpeciesImage(){
 
-    if(finalClassification==="Bread Citizen")
-    return "bred.png";
+if(finalClassification==="Bread Citizen")
+return "bred.png";
 
-    if(finalClassification==="Quantum Mango Inspector")
-    return "Quantum Mango.png";
+if(finalClassification==="Quantum Mango Inspector")
+return "Quantum Mango.png";
 
-    if(finalClassification==="Earbat Negotiator")
-    return "earbat.png";
+if(finalClassification==="Earbat Negotiator")
+return "earbat.png";
 
-    if(finalClassification==="Refrigerator Mediator")
-    return "Refrigerator.png";
+if(finalClassification==="Refrigerator Mediator")
+return "Refrigerator.png";
 
-    if(finalClassification==="Director of GARBAT")
-    return "GIGANIGGA.png";
+if(finalClassification==="Director of GARBAT")
+return "GARBAT.png";
 
-  
+if(finalClassification==="The Forbidden Loaf")
+return "forbidden_loaf.png";
 
+if(finalClassification==="Toast Whisperer")
+return "toast_whisperer.png";
+
+if(finalClassification==="Fruit Sandwich")
+return "fruit_sandwich.png";
+
+if(finalClassification==="Certified Breakfast")
+return "certified_breakfast.png";
+
+if(finalClassification==="Reality Auditor")
+return "reality_auditor.png";
+
+if(finalClassification==="Unstable Produce")
+return "unstable_produce.png";
+
+if(finalClassification==="Cooling System Failure")
+return "cooling_system_failure.png";
+
+if(finalClassification==="Quantum Observer")
+return "quantum_observer.png";
+
+if(finalClassification==="Thermal Negotiator")
+return "thermal_negotiator.png";
+
+if(finalClassification==="Frozen Mango Incident")
+return "frozen_mango_incident.png";
+
+return "";
 }
-
 function showResults(){
 
+    let specialCertificate =
+
+finalClassification ===
+"Unknown GARBAT Entity";
+    
     let highest = "bread";
 
     for(let key in scores){
@@ -627,8 +660,10 @@ function showResults(){
     );
     document.querySelector(".card").innerHTML = `
 
-    <div id="certificate" class="certificate">
-
+   <div
+id="certificate"
+class="certificate
+${specialCertificate ? "danger-cert" : ""}">
         <div class="cert-header">
 
             <h1>GARBAT</h1>
@@ -646,12 +681,7 @@ function showResults(){
         <hr>
 
       ${
-finalClassification.includes("Citizen") ||
-finalClassification.includes("Inspector") ||
-finalClassification.includes("Negotiator") ||
-finalClassification.includes("Mediator") ||
-finalClassification==="Director of GARBAT"
-
+getSpeciesImage() !== ""
 ?
 
 `<img
