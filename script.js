@@ -859,3 +859,21 @@ function downloadCertificate(){
     });
 
 }
+
+document.addEventListener(
+"click",
+function(){
+
+let music =
+document.getElementById("bgm");
+
+if(music.paused){
+
+music.volume = 0.2;
+
+music.play();
+
+}
+
+}
+);
