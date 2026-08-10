@@ -729,3 +729,19 @@ rgba(0,0,0,0.25)
 );
 
 }
+.danger-cert{
+background:#2a0000;
+border:6px solid red;
+box-shadow:0 0 30px red;
+color:white;
+}
+
+.danger-cert .cert-header{
+color:#ff4444;
+}
+
+.danger-cert .stamp{
+background:red;
+color:white;
+transform:rotate(-10deg);
+}
