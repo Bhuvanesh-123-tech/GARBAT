@@ -495,37 +495,37 @@ if(finalClassification==="Refrigerator Mediator")
 return "Refrigerator.png";
 
 if(finalClassification==="Director of GARBAT")
-return "GARBAT.png";
+return "GIGANIGGA.png";
 
 if(finalClassification==="The Forbidden Loaf")
-return "forbidden_loaf.png";
+return "forbidden-loaf.png";
 
 if(finalClassification==="Toast Whisperer")
-return "toast_whisperer.png";
+return "toast-whisperer.png";
 
 if(finalClassification==="Fruit Sandwich")
-return "fruit_sandwich.png";
+return "fruit-sandwich.png";
 
 if(finalClassification==="Certified Breakfast")
-return "certified_breakfast.png";
+return "certified-breakfast.png";
 
 if(finalClassification==="Reality Auditor")
-return "reality_auditor.png";
+return "reality-auditor.png";
 
 if(finalClassification==="Unstable Produce")
-return "unstable_produce.png";
+return "unstable-produce.png";
 
 if(finalClassification==="Cooling System Failure")
-return "cooling_system_failure.png";
+return "cooling-system-failure.png";
 
 if(finalClassification==="Quantum Observer")
-return "quantum_observer.png";
+return "Quantum-Observer.png";
 
 if(finalClassification==="Thermal Negotiator")
-return "thermal_negotiator.png";
+return "thermal-negotiator.png";
 
 if(finalClassification==="Frozen Mango Incident")
-return "frozen_mango_incident.png";
+return "frozen-mango-incident.png";
 
 return "";
 }
