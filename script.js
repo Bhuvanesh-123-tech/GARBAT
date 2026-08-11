@@ -869,7 +869,7 @@ document.getElementById("bgm");
 
 if(music.paused){
 
-music.volume = 0.2;
+music.volume = 9;
 
 music.play();
 
