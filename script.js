@@ -244,6 +244,16 @@ function shuffleArray(array){
 }
 
 function continueAssessment(){
+    let music =
+document.getElementById("bgm");
+
+if(music){
+
+    music.volume = 0.15;
+
+    music.play();
+
+}
 
     username =
     document.querySelector("input").value;
@@ -859,21 +869,3 @@ function downloadCertificate(){
     });
 
 }
-
-document.addEventListener(
-"click",
-function(){
-
-let music =
-document.getElementById("bgm");
-
-if(music.paused){
-
-music.volume = 9;
-
-music.play();
-
-}
-
-}
-);
