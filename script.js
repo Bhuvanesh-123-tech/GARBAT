@@ -249,7 +249,7 @@ document.getElementById("bgm");
 
 if(music){
 
-    music.volume = 1.0;
+    music.volume = 9.0;
 
     music.play();
 
