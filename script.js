@@ -244,15 +244,15 @@ function shuffleArray(array){
 }
 
 function continueAssessment(){
-    let music =
-document.getElementById("bgm");
+let music = document.getElementById("bgm");
 
-if(music){
+if (music) {
+    music.volume = 0.15;
 
-    music.volume = 9.0;
-
-    music.play();
-
+    music.play().catch(err => {
+        console.log("Audio blocked:", err);
+    });
+}
 }
 
     username =
