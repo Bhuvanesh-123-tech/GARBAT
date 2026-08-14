@@ -213,6 +213,7 @@ observations:[
 
 };
 let finalClassification = "";
+let highest = "";
 let certificateID = "";
 
 let username = "";
@@ -759,7 +760,7 @@ function showResults(){
 finalClassification ===
 "Unknown GARBAT Entity";
     
-    let highest = "bread";
+    highest = "bread";
 
     for(let key in scores){
 
@@ -1058,7 +1059,14 @@ class="cert-species">`
     </button>
 
     <br><br>
+<button
+onclick="showIncidentReport()">
 
+View Incident Report
+
+</button>
+
+<br><br>
     <button
     onclick="location.reload()">
 
@@ -1097,5 +1105,83 @@ function downloadCertificate(){
         link.click();
 
     });
+
+}
+function showIncidentReport(){
+
+let report =
+reportData[highest];
+
+let threat =
+randomItem(
+report.threats
+);
+
+let recommendation =
+randomItem(
+report.recommendations
+);
+
+let observations =
+getRandomObservations(
+report.observations,
+2
+);
+
+document.querySelector(".card").innerHTML = `
+
+<h1>GARBAT</h1>
+
+<h2>${report.title}</h2>
+
+<hr>
+
+<p>
+<b>Subject:</b> ${username}
+</p>
+
+<p>
+<b>Classification:</b> ${finalClassification}
+</p>
+
+<p>
+<b>Certificate ID:</b> ${certificateID}
+</p>
+
+<p>
+<b>Threat Level:</b> ${threat}
+</p>
+
+<hr>
+
+<h3>Observations</h3>
+
+<ul>
+
+<li>${observations[0]}</li>
+
+<li>${observations[1]}</li>
+
+</ul>
+
+<hr>
+
+<h3>Recommendation</h3>
+
+<p>
+
+${recommendation}
+
+</p>
+
+<br>
+
+<button onclick="showResults()">
+
+Return To Certificate
+
+</button>
+
+`;
 
 }
