@@ -244,17 +244,16 @@ function shuffleArray(array){
 }
 
 function continueAssessment(){
-let music = document.getElementById("bgm");
+let music =
+document.getElementById("bgm");
 
-if (music) {
+if(music){
+
     music.volume = 0.15;
 
-    music.play().catch(err => {
-        console.log("Audio blocked:", err);
-    });
-}
-}
+    music.play().catch(() => {});
 
+}
     username =
     document.querySelector("input").value;
 
