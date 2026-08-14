@@ -1,3 +1,217 @@
+function randomItem(array){
+
+return array[
+Math.floor(
+Math.random()*array.length
+)
+];
+
+}
+const reportData = {
+
+bread:{
+
+title:"LOAF ACTIVITY REPORT",
+
+threats:[
+"LOW",
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Continue bread monitoring.",
+
+"Subject may enter bakery unsupervised.",
+
+"Maintain toast surveillance.",
+
+"Observe future loaf activity.",
+
+"Keep subject away from suspicious baguettes."
+
+],
+
+observations:[
+
+"Subject consumed suspicious toast.",
+
+"Loaf interaction detected.",
+
+"Subject displays advanced sandwich tendencies.",
+
+"Bakery proximity increasing.",
+
+"Butter usage remains classified.",
+
+"Subject attempted to organize bread.",
+
+"Bread loyalty exceeds expected levels.",
+
+"Subject has bread-related motives."
+
+]
+
+},
+
+mango:{
+
+title:"PRODUCE INVESTIGATION REPORT",
+
+threats:[
+"LOW",
+"MODERATE",
+"HIGH",
+"SEVERE"
+],
+
+recommendations:[
+
+"Monitor mango interactions.",
+
+"Keep subject away from fruit markets.",
+
+"Continue produce analysis.",
+
+"Observe tropical tendencies."
+
+],
+
+observations:[
+
+"Quantum mango activity detected.",
+
+"Subject approached restricted produce.",
+
+"Mango cooperation confirmed.",
+
+"Fruit anomaly remains unresolved.",
+
+"Subject displays tropical tendencies.",
+
+"Produce confidence unusually high."
+
+]
+
+},
+
+earbat:{
+
+title:"EARBAT OBSERVATION FILE",
+
+threats:[
+"MODERATE",
+"HIGH",
+"UNKNOWN"
+],
+
+recommendations:[
+
+"Continue aerial surveillance.",
+
+"Monitor Earbat communications.",
+
+"Subject requires observation.",
+
+"Record future Earbat encounters."
+
+],
+
+observations:[
+
+"Earbat communication observed.",
+
+"Subject responded to ultrasonic discussion.",
+
+"Earbat approval granted.",
+
+"Flight-path analysis inconclusive.",
+
+"Subject remains under aerial observation."
+
+]
+
+},
+
+refrigerator:{
+
+title:"THERMAL INCIDENT REPORT",
+
+threats:[
+"LOW",
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Maintain cooling compliance.",
+
+"Observe refrigeration behavior.",
+
+"Continue thermal monitoring.",
+
+"Inspect nearby refrigerators."
+
+],
+
+observations:[
+
+"Cooling compliance confirmed.",
+
+"Subject respected refrigeration protocol.",
+
+"Thermal negotiations successful.",
+
+"Refrigerator activity detected.",
+
+"Temperature stability maintained."
+
+]
+
+},
+
+chaos:{
+
+title:"REALITY STABILITY REPORT",
+
+threats:[
+"HIGH",
+"SEVERE",
+"CRITICAL",
+"UNKNOWN"
+],
+
+recommendations:[
+
+"Containment impossible.",
+
+"Avoid eye contact.",
+
+"Monitor reality fluctuations.",
+
+"Prepare emergency procedures."
+
+],
+
+observations:[
+
+"Reality instability detected.",
+
+"Subject ignored basic logic.",
+
+"Containment impossible.",
+
+"Multiple anomalies recorded.",
+
+"Chaos levels exceed recommendation."
+
+]
+
+}
+
+};
 let finalClassification = "";
 let certificateID = "";
 
@@ -574,7 +788,24 @@ finalClassification ===
         }
 
     }
+let report =
+reportData[highest];
 
+let threat =
+randomItem(
+report.threats
+);
+
+let recommendation =
+randomItem(
+report.recommendations
+);
+
+let observations =
+getRandomObservations(
+report.observations,
+2
+);
     if(topScores.length > 1){
 
         let combo =
