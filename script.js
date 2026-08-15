@@ -5,6 +5,9 @@ Math.floor(
 Math.random()*array.length
 )
 ];
+
+}
+
 function getRandomObservations(pool,count){
 
 let shuffled = [...pool];
