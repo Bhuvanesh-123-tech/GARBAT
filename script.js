@@ -482,38 +482,7 @@ answers:[
 {text:"Become Bread",type:"bread"}
 ]
 }
-unknown:{
 
-title:"CLASSIFIED INCIDENT FILE",
-
-threats:[
-"UNKNOWN",
-"CRITICAL"
-],
-
-recommendations:[
-
-"Do not approach.",
-
-"Continue observation.",
-
-"Await further instructions."
-
-],
-
-observations:[
-
-"Classification unavailable.",
-
-"Subject exceeds normal parameters.",
-
-"Report partially corrupted.",
-
-"GARBAT database uncertain."
-
-]
-
-}
 );
 
 function shuffleArray(array){
