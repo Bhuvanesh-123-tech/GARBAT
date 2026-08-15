@@ -1141,6 +1141,37 @@ function downloadCertificate(){
     });
 
 }
+function downloadReport(){
+
+let report =
+document.getElementById(
+"report"
+);
+
+html2canvas(
+report
+).then(function(canvas){
+
+let link =
+document.createElement(
+"a"
+);
+
+link.download =
+username +
+"_IncidentReport.png";
+
+link.href =
+canvas.toDataURL(
+"image/png"
+);
+
+link.click();
+
+});
+
+}
+
 function showIncidentReport(){
 
 let report =
@@ -1164,6 +1195,8 @@ report.observations,
 
 document.querySelector(".card").innerHTML = `
 
+<div id="report">
+
 <div class="report-box">
 
 <h1>GARBAT</h1>
@@ -1185,7 +1218,13 @@ document.querySelector(".card").innerHTML = `
 </p>
 
 <p>
-<b>Threat Level:</b> ${threat}
+<b>Threat Level:</b>
+
+<span class="threat-${threat.toLowerCase()}">
+
+${threat}
+
+</span>
 </p>
 
 <hr>
@@ -1212,11 +1251,29 @@ ${recommendation}
 
 <br>
 
+</div>
+
+</div>
+
+<button onclick="downloadReport()">
+
+Download Report
+
+</button>
+
+<br><br>
+
 <button onclick="showResults()">
 
 Return To Certificate
 
 </button>
+
+<br><br>
+
+<button onclick="location.reload()">
+
+New Assessment
 
 </button>
 
