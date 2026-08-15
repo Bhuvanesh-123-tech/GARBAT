@@ -5,6 +5,30 @@ Math.floor(
 Math.random()*array.length
 )
 ];
+function getRandomObservations(pool,count){
+
+let shuffled = [...pool];
+
+for(
+let i = shuffled.length - 1;
+i > 0;
+i--
+){
+
+let j =
+Math.floor(
+Math.random()*(i+1)
+);
+
+[shuffled[i],shuffled[j]] =
+[shuffled[j],shuffled[i]];
+
+}
+
+return shuffled.slice(
+0,
+count
+);
 
 }
 const reportData = {
@@ -207,6 +231,27 @@ observations:[
 
 "Chaos levels exceed recommendation."
 
+]
+
+}
+unknown:{
+
+title:"CLASSIFIED INCIDENT FILE",
+
+threats:[
+"UNKNOWN",
+"CRITICAL"
+],
+
+recommendations:[
+"Do not approach.",
+"Continue observation."
+],
+
+observations:[
+"Classification unavailable.",
+"Database corruption detected.",
+"Entity exceeds normal parameters."
 ]
 
 }
@@ -434,7 +479,38 @@ answers:[
 {text:"Become Bread",type:"bread"}
 ]
 }
+unknown:{
 
+title:"CLASSIFIED INCIDENT FILE",
+
+threats:[
+"UNKNOWN",
+"CRITICAL"
+],
+
+recommendations:[
+
+"Do not approach.",
+
+"Continue observation.",
+
+"Await further instructions."
+
+],
+
+observations:[
+
+"Classification unavailable.",
+
+"Subject exceeds normal parameters.",
+
+"Report partially corrupted.",
+
+"GARBAT database uncertain."
+
+]
+
+}
 );
 
 function shuffleArray(array){
@@ -685,8 +761,11 @@ function showQuestion(){
 
 function answerQuestion(type){
 
+   if(scores[type] !== undefined){
+
     scores[type]++;
 
+}
     currentQuestion++;
 
     if(
@@ -789,24 +868,7 @@ finalClassification ===
         }
 
     }
-let report =
-reportData[highest];
 
-let threat =
-randomItem(
-report.threats
-);
-
-let recommendation =
-randomItem(
-report.recommendations
-);
-
-let observations =
-getRandomObservations(
-report.observations,
-2
-);
     if(topScores.length > 1){
 
         let combo =
