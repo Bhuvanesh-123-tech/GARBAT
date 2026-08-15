@@ -1192,6 +1192,8 @@ report.observations,
 
 document.querySelector(".card").innerHTML = `
 
+<div class="report-box">
+
 <h1>GARBAT</h1>
 
 <h2>${report.title}</h2>
@@ -1243,6 +1245,10 @@ ${recommendation}
 Return To Certificate
 
 </button>
+
+</button>
+
+</div>
 
 `;
 
