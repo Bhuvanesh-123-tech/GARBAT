@@ -1387,6 +1387,85 @@ occupation:"REDACTED",
 loyalty:0,
 sector:"UNKNOWN",
 correct:"investigate"
+},
+    {
+name:"Quantum Toast",
+occupation:"Reality Tester",
+loyalty:87,
+sector:"Sector Q",
+correct:"investigate"
+},
+
+{
+name:"Bread Hacker",
+occupation:"Database Technician",
+loyalty:73,
+sector:"Cyber Bakery",
+correct:"approve"
+},
+
+{
+name:"Crustopher",
+occupation:"Crumb Collector",
+loyalty:92,
+sector:"Bread District 5",
+correct:"approve"
+},
+
+{
+name:"Mango Agent",
+occupation:"Produce Specialist",
+loyalty:34,
+sector:"Unknown",
+correct:"investigate"
+},
+
+{
+name:"Burnt Toast",
+occupation:"Former Citizen",
+loyalty:18,
+sector:"REDACTED",
+correct:"reject"
+},
+
+{
+name:"Fridge Infiltrator",
+occupation:"Cooling Operative",
+loyalty:41,
+sector:"Refrigerator Zone",
+correct:"investigate"
+},
+
+{
+name:"Loafzilla",
+occupation:"Heavy Bread Unit",
+loyalty:97,
+sector:"Bakery District 9",
+correct:"approve"
+},
+
+{
+name:"The Crumb King",
+occupation:"Regional Manager",
+loyalty:95,
+sector:"Royal Bakery",
+correct:"approve"
+},
+
+{
+name:"Suspicious Bagel",
+occupation:"Unknown",
+loyalty:22,
+sector:"Classified",
+correct:"reject"
+},
+
+{
+name:"Toast Prime",
+occupation:"Elite Supervisor",
+loyalty:100,
+sector:"Central Toaster Hub",
+correct:"approve"
 }
 
 ];
