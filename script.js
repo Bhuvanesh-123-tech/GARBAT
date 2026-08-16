@@ -356,6 +356,238 @@ observations:[
 ]
 
 },
+    quantumObserver:{
+
+title:"QUANTUM OBSERVER INCIDENT REPORT",
+
+threats:[
+"MODERATE",
+"HIGH",
+"UNKNOWN"
+],
+
+recommendations:[
+
+"Continue observation.",
+
+"Do not collapse the waveform.",
+
+"Maintain quantum distance."
+
+],
+
+observations:[
+
+"Subject observed multiple outcomes simultaneously.",
+
+"Earbat-Mango interaction produced uncertainty.",
+
+"Quantum awareness detected.",
+
+"Reality consistency remains questionable."
+
+]
+
+},
+
+thermalNegotiator:{
+
+title:"THERMAL NEGOTIATION REPORT",
+
+threats:[
+"LOW",
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Maintain refrigeration diplomacy.",
+
+"Continue Earbat mediation.",
+
+"Monitor thermal agreements."
+
+],
+
+observations:[
+
+"Subject negotiated with cooling systems.",
+
+"Earbat involvement confirmed.",
+
+"Temperature disputes resolved.",
+
+"Thermal balance maintained."
+
+]
+
+},
+
+frozenMangoIncident:{
+
+title:"FROZEN MANGO INCIDENT REPORT",
+
+threats:[
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Keep mangoes away from refrigeration units.",
+
+"Observe future produce activity.",
+
+"Maintain fruit containment."
+
+],
+
+observations:[
+
+"Mango refrigeration anomaly detected.",
+
+"Produce temperature below expectations.",
+
+"Frozen fruit behavior recorded.",
+
+"Subject remains under produce surveillance."
+
+]
+
+},
+   realityAuditor:{
+
+title:"REALITY AUDIT REPORT",
+
+threats:[
+"HIGH",
+"SEVERE",
+"CRITICAL"
+],
+
+recommendations:[
+
+"Reality integrity must be monitored.",
+
+"Report all paradoxes immediately.",
+
+"Do not trust unusual coincidences."
+
+],
+
+observations:[
+
+"Subject detected inconsistencies in reality.",
+
+"Multiple anomalies recorded.",
+
+"Audit findings remain classified.",
+
+"Reality stability below acceptable levels."
+
+]
+
+},
+
+unstableProduce:{
+
+title:"UNSTABLE PRODUCE INCIDENT REPORT",
+
+threats:[
+"HIGH",
+"SEVERE"
+],
+
+recommendations:[
+
+"Contain affected produce.",
+
+"Observe fruit-related anomalies.",
+
+"Do not consume suspicious mangoes."
+
+],
+
+observations:[
+
+"Produce instability confirmed.",
+
+"Fruit behavior exceeds expectations.",
+
+"Mango-chaos interaction detected.",
+
+"Containment remains difficult."
+
+]
+
+},
+
+coolingSystemFailure:{
+
+title:"COOLING SYSTEM FAILURE REPORT",
+
+threats:[
+"HIGH",
+"CRITICAL"
+],
+
+recommendations:[
+
+"Initiate emergency refrigeration protocol.",
+
+"Monitor thermal instability.",
+
+"Keep produce away from affected units."
+
+],
+
+observations:[
+
+"Refrigeration systems compromised.",
+
+"Cooling efficiency decreasing.",
+
+"Chaos contamination detected.",
+
+"Thermal containment unsuccessful."
+
+]
+
+},
+
+unknownEntity:{
+
+title:"CLASSIFIED INCIDENT FILE",
+
+threats:[
+"UNKNOWN",
+"CRITICAL"
+],
+
+recommendations:[
+
+"DO NOT ATTEMPT CLASSIFICATION.",
+
+"Continue observation only.",
+
+"Await instructions from Toaster Prime."
+
+],
+
+observations:[
+
+"Subject exceeds GARBAT parameters.",
+
+"Database integrity compromised.",
+
+"Classification unavailable.",
+
+"Entity remains unidentified."
+
+]
+
+} 
 };
 let finalClassification = "";
 let highest = "";
@@ -1049,6 +1281,53 @@ finalClassification ===
 )
 reportKey =
 "fruitSandwich";
+    if(
+finalClassification ===
+"Quantum Observer"
+)
+reportKey =
+"quantumObserver";
+
+if(
+finalClassification ===
+"Thermal Negotiator"
+)
+reportKey =
+"thermalNegotiator";
+
+if(
+finalClassification ===
+"Frozen Mango Incident"
+)
+reportKey =
+"frozenMangoIncident";
+    if(
+finalClassification ===
+"Reality Auditor"
+)
+reportKey =
+"realityAuditor";
+
+if(
+finalClassification ===
+"Unstable Produce"
+)
+reportKey =
+"unstableProduce";
+
+if(
+finalClassification ===
+"Cooling System Failure"
+)
+reportKey =
+"coolingSystemFailure";
+
+if(
+finalClassification ===
+"Unknown GARBAT Entity"
+)
+reportKey =
+"unknownEntity";
 
 let report =
 reportData[reportKey];
@@ -1345,6 +1624,53 @@ finalClassification ===
 )
 reportKey =
 "fruitSandwich";
+    if(
+finalClassification ===
+"Quantum Observer"
+)
+reportKey =
+"quantumObserver";
+
+if(
+finalClassification ===
+"Thermal Negotiator"
+)
+reportKey =
+"thermalNegotiator";
+
+if(
+finalClassification ===
+"Frozen Mango Incident"
+)
+reportKey =
+"frozenMangoIncident";
+    if(
+finalClassification ===
+"Reality Auditor"
+)
+reportKey =
+"realityAuditor";
+
+if(
+finalClassification ===
+"Unstable Produce"
+)
+reportKey =
+"unstableProduce";
+
+if(
+finalClassification ===
+"Cooling System Failure"
+)
+reportKey =
+"coolingSystemFailure";
+
+if(
+finalClassification ===
+"Unknown GARBAT Entity"
+)
+reportKey =
+"unknownEntity";
 
 let report =
 reportData[reportKey];
