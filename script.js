@@ -263,6 +263,9 @@ observations:[
 let finalClassification = "";
 let highest = "";
 let certificateID = "";
+let reportThreat = "";
+let reportRecommendation = "";
+let reportObservations = [];
 
 let username = "";
 
@@ -926,13 +929,40 @@ finalClassification ===
         "Director of GARBAT";
 
     }
+    
+    let report =
+reportData[highest];
 
-    certificateID =
-    "GARBAT-" +
-    Math.floor(
-    10000 +
-    Math.random()*90000
-    );
+if(reportThreat === ""){
+
+reportThreat =
+randomItem(
+report.threats
+);
+
+reportRecommendation =
+randomItem(
+report.recommendations
+);
+
+reportObservations =
+getRandomObservations(
+report.observations,
+2
+);
+
+}
+
+if(certificateID === ""){
+
+certificateID =
+"GARBAT-" +
+Math.floor(
+10000 +
+Math.random()*90000
+);
+
+}
     document.querySelector(".card").innerHTML = `
 
    <div
@@ -1177,22 +1207,6 @@ function showIncidentReport(){
 let report =
 reportData[highest];
 
-let threat =
-randomItem(
-report.threats
-);
-
-let recommendation =
-randomItem(
-report.recommendations
-);
-
-let observations =
-getRandomObservations(
-report.observations,
-2
-);
-
 document.querySelector(".card").innerHTML = `
 
 <div id="report">
@@ -1220,9 +1234,9 @@ document.querySelector(".card").innerHTML = `
 <p>
 <b>Threat Level:</b>
 
-<span class="threat-${threat.toLowerCase()}">
+<span class="threat-${reportThreat.toLowerCase()}">
 
-${threat}
+${reportThreat}
 
 </span>
 </p>
@@ -1233,9 +1247,9 @@ ${threat}
 
 <ul>
 
-<li>${observations[0]}</li>
+<li>${reportObservations[0]}</li>
 
-<li>${observations[1]}</li>
+<li>${reportObservations[1]}</li>
 
 </ul>
 
@@ -1245,7 +1259,7 @@ ${threat}
 
 <p>
 
-${recommendation}
+${reportRecommendation}
 
 </p>
 
@@ -1276,8 +1290,6 @@ Return To Certificate
 New Assessment
 
 </button>
-
-</div>
 
 `;
 
