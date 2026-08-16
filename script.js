@@ -257,8 +257,105 @@ observations:[
 "Entity exceeds normal parameters."
 ]
 
-}
+},
+forbiddenLoaf:{
 
+title:"FORBIDDEN LOAF INCIDENT REPORT",
+
+threats:[
+"SEVERE",
+"CRITICAL"
+],
+
+recommendations:[
+
+"Do not approach the loaf.",
+
+"Continue bakery surveillance.",
+
+"Maintain containment protocols."
+
+],
+
+observations:[
+
+"Subject displays simultaneous bread and chaos alignment.",
+
+"Loaf influence exceeds safe levels.",
+
+"Reality distortion detected near bakery products.",
+
+"GARBAT containment remains uncertain."
+
+]
+
+},
+
+toastWhisperer:{
+
+title:"TOAST COMMUNICATION REPORT",
+
+threats:[
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Monitor bread-related conversations.",
+
+"Do not leave toast unattended.",
+
+"Record future loaf interactions."
+
+],
+
+observations:[
+
+"Subject communicates with toast successfully.",
+
+"Loaf response detected.",
+
+"Unusual bread cooperation observed.",
+
+"Toast activity remains unexplained."
+
+]
+
+},
+
+fruitSandwich:{
+
+title:"FRUIT SANDWICH INCIDENT REPORT",
+
+threats:[
+"MODERATE",
+"HIGH"
+],
+
+recommendations:[
+
+"Separate bread from produce.",
+
+"Monitor sandwich construction.",
+
+"Observe mango-bread interactions."
+
+],
+
+observations:[
+
+"Fruit and bread alliance confirmed.",
+
+"Subject crossed food-category boundaries.",
+
+"Sandwich anomaly detected.",
+
+"Mango cooperation remains active."
+
+]
+
+},
 };
 let finalClassification = "";
 let highest = "";
@@ -930,8 +1027,31 @@ finalClassification ===
 
     }
     
-    let report =
-reportData[highest];
+let reportKey = highest;
+
+if(
+finalClassification ===
+"The Forbidden Loaf"
+)
+reportKey =
+"forbiddenLoaf";
+
+if(
+finalClassification ===
+"Toast Whisperer"
+)
+reportKey =
+"toastWhisperer";
+
+if(
+finalClassification ===
+"Fruit Sandwich"
+)
+reportKey =
+"fruitSandwich";
+
+let report =
+reportData[reportKey];
 
 if(reportThreat === ""){
 
@@ -1203,9 +1323,31 @@ link.click();
 }
 
 function showIncidentReport(){
+let reportKey = highest;
+
+if(
+finalClassification ===
+"The Forbidden Loaf"
+)
+reportKey =
+"forbiddenLoaf";
+
+if(
+finalClassification ===
+"Toast Whisperer"
+)
+reportKey =
+"toastWhisperer";
+
+if(
+finalClassification ===
+"Fruit Sandwich"
+)
+reportKey =
+"fruitSandwich";
 
 let report =
-reportData[highest];
+reportData[reportKey];
 
 document.querySelector(".card").innerHTML = `
 
