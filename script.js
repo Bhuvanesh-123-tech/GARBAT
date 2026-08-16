@@ -589,17 +589,20 @@ observations:[
 
 } 
 };
+let directorBreadPopulation;
+let directorMangoStability;
+let directorRealityIntegrity;
 let finalClassification = "";
 let highest = "";
 let certificateID = "";
 let reportThreat = "";
 let reportRecommendation = "";
 let reportObservations = [];
-
 let username = "";
-
 let currentQuestion = 0;
-
+let auditScore = 0;
+let auditIndex = 0;
+let currentCitizen = null;
 let scores = {
 
 bread:0,
@@ -993,40 +996,47 @@ New Assessment
 }
 function showDirectorDashboard(){
 
-    let breadPopulation =
+  if(!directorBreadPopulation){
+
+directorBreadPopulation =
 Math.floor(
 1000000 +
 Math.random()*500000
 );
 
-let mangoStability =
+directorMangoStability =
 Math.floor(
 50 +
 Math.random()*50
 );
 
-    let realityIntegrity;
-if(mangoStability >= 90){
+if(directorMangoStability >= 90){
 
-    realityIntegrity = "🟢 Stable";
-
-}
-
-else if(mangoStability >= 70){
-
-    realityIntegrity = "🟡 Acceptable";
+directorRealityIntegrity =
+"🟢 Stable";
 
 }
 
-else if(mangoStability >= 60){
+else if(directorMangoStability >= 70){
 
-    realityIntegrity = "🟠 Questionable";
+directorRealityIntegrity =
+"🟡 Acceptable";
+
+}
+
+else if(directorMangoStability >= 60){
+
+directorRealityIntegrity =
+"🟠 Questionable";
 
 }
 
 else{
 
-    realityIntegrity = "🔴 Critical";
+directorRealityIntegrity =
+"🔴 Critical";
+
+}
 
 }
     
@@ -1060,7 +1070,7 @@ Welcome back, Director.
 
 <br>
 
-${breadPopulation.toLocaleString()}
+${directorBreadPopulation.toLocaleString()}
 
 </p>
 
@@ -1072,7 +1082,7 @@ ${breadPopulation.toLocaleString()}
 
 <br>
 
-${mangoStability}%
+${directorMangoStability}%
 
 </p>
 
@@ -1096,7 +1106,7 @@ Pending
 
 <br>
 
-${realityIntegrity}
+${directorRealityIntegrity}
 
 </p>
 
@@ -1233,11 +1243,11 @@ CONFIDENTIAL RESEARCH DATABASE
 
 </p>
 
-<p>
+<div class="archive-entry">
 
-${latestLog}
+${latestLog.replace(/\n/g,"<br>")}
 
-</p>
+</div>
 
 <hr>
 
@@ -1331,6 +1341,231 @@ Unknown GARBAT Entity
 <button onclick="showDirectorDashboard()">
 
 Back
+
+</button>
+
+`;
+
+}
+const breadCitizens = [
+
+{
+name:"Loafbert",
+occupation:"Toast Supervisor",
+loyalty:98,
+sector:"Bakery 7",
+correct:"approve"
+},
+
+{
+name:"Sir Toastington",
+occupation:"Breakfast Security",
+loyalty:100,
+sector:"Central Toaster Hub",
+correct:"approve"
+},
+
+{
+name:"Mango Worshipper",
+occupation:"Unknown",
+loyalty:12,
+sector:"Classified",
+correct:"reject"
+},
+
+{
+name:"Crumb Collector",
+occupation:"Archive Worker",
+loyalty:85,
+sector:"Bread District 3",
+correct:"approve"
+},
+
+{
+name:"The Forbidden Loaf",
+occupation:"REDACTED",
+loyalty:0,
+sector:"UNKNOWN",
+correct:"investigate"
+}
+
+];
+function showBreadRegistry(){
+
+auditScore = 0;
+
+auditIndex = 0;
+
+showNextCitizen();
+
+}
+function showNextCitizen(){
+
+if(auditIndex >= 5){
+
+showAuditResults();
+
+return;
+
+}
+
+currentCitizen =
+
+breadCitizens[
+Math.floor(
+Math.random()*
+breadCitizens.length
+)
+];
+
+document.querySelector(".card").innerHTML = `
+
+<h1>🍞 BREAD REGISTRY AUDIT</h1>
+
+<p>
+
+Citizen Review
+${auditIndex+1}/5
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Name:</b>
+
+${currentCitizen.name}
+
+</p>
+
+<p>
+
+<b>Occupation:</b>
+
+${currentCitizen.occupation}
+
+</p>
+
+<p>
+
+<b>Loyalty:</b>
+
+${currentCitizen.loyalty}%
+
+</p>
+
+<p>
+
+<b>Sector:</b>
+
+${currentCitizen.sector}
+
+</p>
+
+<hr>
+
+<button onclick="auditDecision('approve')">
+
+✅ Approve
+
+</button>
+
+<br><br>
+
+<button onclick="auditDecision('reject')">
+
+❌ Reject
+
+</button>
+
+<br><br>
+
+<button onclick="auditDecision('investigate')">
+
+🔍 Investigate
+
+</button>
+
+`;
+
+}
+function auditDecision(choice){
+
+if(
+choice ===
+currentCitizen.correct
+){
+
+auditScore++;
+
+}
+
+auditIndex++;
+
+showNextCitizen();
+
+}
+function showAuditResults(){
+
+let rank = "";
+
+if(auditScore === 5){
+
+rank =
+"MASTER AUDITOR";
+
+}
+
+else if(auditScore >= 3){
+
+rank =
+"COMPETENT DIRECTOR";
+
+}
+
+else{
+
+rank =
+"TOASTER INTERN";
+
+}
+
+document.querySelector(".card").innerHTML = `
+
+<h1>🍞 AUDIT COMPLETE</h1>
+
+<hr>
+
+<p>
+
+Score:
+
+<b>${auditScore}/5</b>
+
+</p>
+
+<p>
+
+Rank:
+
+<b>${rank}</b>
+
+</p>
+
+<hr>
+
+<p>
+
+Director Evaluation Recorded.
+
+</p>
+
+<br>
+
+<button onclick="showDirectorDashboard()">
+
+Return To Dashboard
 
 </button>
 
