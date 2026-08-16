@@ -1147,6 +1147,79 @@ ${realityIntegrity}
 `;
 
 }
+function showClassifiedReports(){
+
+document.querySelector(".card").innerHTML = `
+
+<h1>📜 CLASSIFIED REPORTS</h1>
+
+<p>
+
+Only Director-Level Personnel May View.
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Incident #044</b>
+
+<br>
+
+The Forbidden Loaf
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Incident #118</b>
+
+<br>
+
+Frozen Mango Event
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Incident #233</b>
+
+<br>
+
+Cooling System Failure
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Incident #404</b>
+
+<br>
+
+Unknown GARBAT Entity
+
+</p>
+
+<hr>
+
+<br>
+
+<button onclick="showDirectorDashboard()">
+
+Back
+
+</button>
+
+`;
+
+}
 questions.push(
 
 {
