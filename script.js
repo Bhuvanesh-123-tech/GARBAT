@@ -589,6 +589,25 @@ observations:[
 
 } 
 };
+let containmentActive = false;
+
+let containmentStartTime;
+
+let containmentInterval;
+
+let sectors = [
+"bread",
+"mango",
+"earbat",
+"unknown"
+];
+
+let sectorStatus = {
+bread:"stable",
+mango:"stable",
+earbat:"stable",
+unknown:"stable"
+};
 let directorBreadPopulation;
 let directorMangoStability;
 let directorRealityIntegrity;
@@ -1140,7 +1159,7 @@ ${directorRealityIntegrity}
 
 <br><br>
 
-<button onclick="showContainmentStatus()">
+<button onclick="startContainmentMode()">
 
 ⚠ Containment Status
 
@@ -1643,6 +1662,269 @@ Director Evaluation Recorded.
 <br>
 
 <button onclick="showDirectorDashboard()">
+
+Return To Dashboard
+
+</button>
+
+`;
+
+}
+function startContainmentMode(){
+
+containmentActive = true;
+
+containmentStartTime = Date.now();
+
+sectorStatus = {
+bread:"stable",
+mango:"stable",
+earbat:"stable",
+unknown:"stable"
+};
+
+renderContainmentScreen();
+
+containmentInterval =
+setInterval(
+containmentTick,
+5000
+);
+
+}
+function renderContainmentScreen(){
+
+document.querySelector(".card").innerHTML = `
+
+<h1>
+
+⚠ CONTAINMENT STATUS ⚠
+
+</h1>
+
+<hr>
+
+<p>
+
+Bread Sector
+
+<br>
+
+${getSectorEmoji("bread")}
+
+</p>
+
+<p>
+
+Mango Sector
+
+<br>
+
+${getSectorEmoji("mango")}
+
+</p>
+
+<p>
+
+Earbat Sector
+
+<br>
+
+${getSectorEmoji("earbat")}
+
+</p>
+
+<p>
+
+Unknown Entity Cell
+
+<br>
+
+${getSectorEmoji("unknown")}
+
+</p>
+
+`;
+
+}
+function getSectorEmoji(sector){
+
+if(
+sectorStatus[sector] ===
+"stable"
+)
+return "🟢 Stable";
+
+if(
+sectorStatus[sector] ===
+"warning"
+)
+return "🟠 Might Need Help";
+
+if(
+sectorStatus[sector] ===
+"breach"
+)
+return "🔴 BREACH IMMEDIATELY";
+
+if(
+sectorStatus[sector] ===
+"destroyed"
+)
+return "☠ Destroyed";
+
+}
+function containmentTick(){
+
+let aliveSectors = sectors.filter(
+
+s => sectorStatus[s] !== "destroyed"
+
+);
+
+if(aliveSectors.length === 0){
+
+gameOver();
+
+return;
+
+}
+
+let sector = aliveSectors[
+Math.floor(
+Math.random()*aliveSectors.length
+)
+];
+
+if(
+sectorStatus[sector] === "stable"
+){
+
+sectorStatus[sector] = "warning";
+
+renderContainmentScreen();
+
+setTimeout(()=>{
+
+if(
+sectorStatus[sector] !== "warning"
+)return;
+
+if(Math.random()<0.5){
+
+sectorStatus[sector] = "stable";
+
+}
+
+else{
+
+sectorStatus[sector] = "breach";
+
+renderContainmentScreen();
+
+spawnAlarm(sector);
+
+return;
+
+}
+
+renderContainmentScreen();
+
+},3000);
+
+}
+
+}
+function spawnAlarm(sector){
+
+renderContainmentScreen();
+
+document.querySelector(".card").innerHTML += `
+
+<br>
+
+<button
+onclick="fixBreach('${sector}')">
+
+🚨
+
+</button>
+
+`;
+
+setTimeout(()=>{
+
+if(
+sectorStatus[sector] === "breach"
+){
+
+sectorStatus[sector] =
+"destroyed";
+
+renderContainmentScreen();
+
+}
+
+},15000);
+
+}
+function fixBreach(sector){
+
+if(
+sectorStatus[sector] === "breach"
+){
+
+sectorStatus[sector] =
+"stable";
+
+renderContainmentScreen();
+
+}
+
+}
+function gameOver(){
+
+clearInterval(
+containmentInterval
+);
+
+let survived = Math.floor(
+
+(Date.now() -
+containmentStartTime)
+
+/
+
+1000
+
+);
+
+document.querySelector(".card").innerHTML = `
+
+<h1>
+
+⚠ CONTAINMENT FAILURE ⚠
+
+</h1>
+
+<p>
+
+Time Survived:
+
+${survived} Seconds
+
+</p>
+
+<p>
+
+Acknowledged by GARBAT.
+
+</p>
+
+<br>
+
+<button
+onclick="showDirectorDashboard()">
 
 Return To Dashboard
 
