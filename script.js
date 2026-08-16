@@ -993,6 +993,43 @@ New Assessment
 }
 function showDirectorDashboard(){
 
+    let breadPopulation =
+Math.floor(
+1000000 +
+Math.random()*500000
+);
+
+let mangoStability =
+Math.floor(
+50 +
+Math.random()*50
+);
+
+    let realityIntegrity;
+if(mangoStability >= 90){
+
+    realityIntegrity = "🟢 Stable";
+
+}
+
+else if(mangoStability >= 70){
+
+    realityIntegrity = "🟡 Acceptable";
+
+}
+
+else if(mangoStability >= 60){
+
+    realityIntegrity = "🟠 Questionable";
+
+}
+
+else{
+
+    realityIntegrity = "🔴 Critical";
+
+}
+    
 document.querySelector(".card").innerHTML = `
 
 <h1>⚠ GARBAT INTERNAL DATABASE ⚠</h1>
@@ -1023,7 +1060,7 @@ Welcome back, Director.
 
 <br>
 
-1,284,122
+${breadPopulation.toLocaleString()}
 
 </p>
 
@@ -1035,7 +1072,7 @@ Welcome back, Director.
 
 <br>
 
-73%
+${mangoStability}%
 
 </p>
 
@@ -1059,7 +1096,7 @@ Pending
 
 <br>
 
-Questionable
+${realityIntegrity}
 
 </p>
 
