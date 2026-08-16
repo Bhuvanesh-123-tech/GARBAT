@@ -748,31 +748,33 @@ background:red;
 color:white;
 transform:rotate(-10deg);
 }
+
 .report-box{
 
-background:
-rgba(10,15,30,.95);
+background:white;
 
-border:
-1px solid rgba(79,140,255,.25);
+color:black;
 
-border-radius:15px;
+padding:40px;
 
-box-shadow:
-0 0 25px rgba(79,140,255,.15);
+border:8px solid #caa95c;
 
-text-align:left;
-
-padding:25px;
+border-radius:12px;
 
 max-width:700px;
 
 margin:auto;
 
+text-align:left;
+
 animation:
 reportFade 0.4s ease;
 
+box-shadow:none;
+
 }
+
+
 .report-box h1{
 
 text-align:center;
@@ -793,9 +795,15 @@ text-align:center;
 
 margin-bottom:20px;
 
-color:#4f8cff;
+color:#204080;
 
 letter-spacing:1px;
+
+}
+.report-box p,
+.report-box li{
+
+color:black;
 
 }
 
@@ -805,11 +813,11 @@ margin-top:15px;
 
 margin-bottom:10px;
 
-color:#ffcc66;
+color:#996600;
 
 border-bottom:
 
-1px solid rgba(255,204,102,.3);
+1px solid #d0d0d0;
 
 padding-bottom:5px;
 
@@ -824,9 +832,7 @@ list-style:none;
 }
 .report-box li{
 
-background:
-
-rgba(255,255,255,.05);
+background:#f5f5f5;
 
 border-left:
 
@@ -838,20 +844,20 @@ margin-bottom:10px;
 
 border-radius:8px;
 
+color:black;
+
 }
 .report-box hr{
 
 margin:18px 0;
 
-opacity:0.3;
-
 border:none;
 
 height:1px;
 
-background:
+background:#999;
 
-rgba(255,255,255,.2);
+opacity:1;
 
 }
 @keyframes reportFade{
