@@ -1189,7 +1189,7 @@ document.createElement(
 
 link.download =
 username +
-"_IncidentReport.png";
+"_GARBAT_Report.png";
 
 link.href =
 canvas.toDataURL(
