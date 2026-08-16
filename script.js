@@ -1147,6 +1147,123 @@ ${realityIntegrity}
 `;
 
 }
+
+function showMangoArchives(){
+
+const logs = [
+
+`Experiment 042
+
+Objective:
+Teach mangoes algebra.
+
+Result:
+Mangoes taught algebra
+to researchers instead.
+
+Project terminated.`,
+
+`Experiment 118
+
+Objective:
+Measure mango intelligence.
+
+Result:
+Mango requested legal
+representation.
+
+Research suspended.`,
+
+`Experiment 204
+
+Objective:
+Store three quantum
+mangoes in one fridge.
+
+Result:
+Fridge collapsed.
+
+Physics resigned.`,
+
+`Experiment 330
+
+Objective:
+Observe mango behavior.
+
+Result:
+Mango began observing
+researchers instead.
+
+Status:
+Unsettling.`,
+
+`Experiment 404
+
+Objective:
+Classify anomalous mango.
+
+Result:
+Mango classified us.
+
+Status:
+Classified.`
+
+];
+
+let latestLog =
+logs[Math.floor(
+Math.random()*logs.length
+)];
+
+document.querySelector(".card").innerHTML = `
+
+<h1>🥭 MANGO ARCHIVES</h1>
+
+<p>
+
+CONFIDENTIAL RESEARCH DATABASE
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Latest Research Log</b>
+
+</p>
+
+<p>
+
+${latestLog}
+
+</p>
+
+<hr>
+
+<p>
+
+<b>Director Note:</b>
+
+<br>
+
+Never trust a mango
+that knows your name.
+
+</p>
+
+<hr>
+
+<button onclick="showDirectorDashboard()">
+
+Back
+
+</button>
+
+`;
+
+}
+
 function showClassifiedReports(){
 
 document.querySelector(".card").innerHTML = `
