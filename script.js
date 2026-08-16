@@ -837,8 +837,8 @@ function shuffleArray(array){
     }
 
 }
-
 function continueAssessment(){
+
 let music =
 document.getElementById("bgm");
 
@@ -849,38 +849,52 @@ if(music){
     music.play().catch(() => {});
 
 }
-    username =
-    document.querySelector("input").value;
 
-    if(username.trim()===""){
+username =
+document.querySelector("input").value;
 
-        alert(
-        "Identification Required"
-        );
+if(username.trim()===""){
 
-        return;
+    alert(
+    "Identification Required"
+    );
 
-    }
+    return;
 
-    document.querySelector(".card").innerHTML = `
+}
 
-    <h1>GARBAT</h1>
+/* DIRECTOR ROUTE */
 
-    <h2>
-    Welcome, ${username}
-    </h2>
+if(
+username.trim().toLowerCase() ===
+"garbat"
+){
 
-    <p>
-    GARBAT acknowledges your existence.
-    </p>
+    showDirectorLogin();
 
-    <br>
+    return;
 
-    <button onclick="beginAssessment()">
-    Begin Assessment
-    </button>
+}
 
-    `;
+document.querySelector(".card").innerHTML = `
+
+<h1>GARBAT</h1>
+
+<h2>
+Welcome, ${username}
+</h2>
+
+<p>
+GARBAT acknowledges your existence.
+</p>
+
+<br>
+
+<button onclick="beginAssessment()">
+Begin Assessment
+</button>
+
+`;
 
 }
 
@@ -893,6 +907,118 @@ function beginAssessment(){
     currentQuestion = 0;
 
     showQuestion();
+
+}
+function showDirectorLogin(){
+
+document.querySelector(".card").innerHTML = `
+
+<h1>⚠ GARBAT INTERNAL SYSTEM ⚠</h1>
+
+<p>
+
+Prove you are the real Director.
+
+</p>
+
+<br>
+
+<input
+id="directorCode"
+type="password"
+placeholder="Authorization Code">
+
+<br><br>
+
+<button
+onclick="verifyDirectorCode()">
+
+Verify Identity
+
+</button>
+
+<br><br>
+
+<button
+onclick="location.reload()">
+
+Return
+
+</button>
+
+`;
+
+}
+function verifyDirectorCode(){
+
+let code =
+document.getElementById(
+"directorCode"
+).value;
+
+if(
+code ===
+"TOASTER_PRIME_V4_OG"
+){
+
+showDirectorDashboard();
+
+}
+
+else{
+
+document.querySelector(".card").innerHTML = `
+
+<h1>ACCESS DENIED</h1>
+
+<p>
+
+GET LOST.
+
+</p>
+
+<br>
+
+<button
+onclick="location.reload()">
+
+New Assessment
+
+</button>
+
+`;
+
+}
+
+}
+function showDirectorDashboard(){
+
+document.querySelector(".card").innerHTML = `
+
+<h1>DIRECTOR VERIFIED</h1>
+
+<p>
+
+Welcome back, Director.
+
+</p>
+
+<p>
+
+Toaster Prime acknowledges your authority.
+
+</p>
+
+<br>
+
+<button
+onclick="location.reload()">
+
+Exit Director Mode
+
+</button>
+
+`;
 
 }
 questions.push(
