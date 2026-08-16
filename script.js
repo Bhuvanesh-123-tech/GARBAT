@@ -995,7 +995,7 @@ function showDirectorDashboard(){
 
 document.querySelector(".card").innerHTML = `
 
-<h1>DIRECTOR VERIFIED</h1>
+<h1>⚠ GARBAT INTERNAL DATABASE ⚠</h1>
 
 <p>
 
@@ -1003,18 +1003,107 @@ Welcome back, Director.
 
 </p>
 
+<br>
+
 <p>
 
-Toaster Prime acknowledges your authority.
+<b>Agency Status:</b>
+
+<br>
+
+🟢 Operational
 
 </p>
 
 <br>
 
-<button
-onclick="location.reload()">
+<p>
 
-Exit Director Mode
+<b>Bread Population:</b>
+
+<br>
+
+1,284,122
+
+</p>
+
+<br>
+
+<p>
+
+<b>Mango Stability:</b>
+
+<br>
+
+73%
+
+</p>
+
+<br>
+
+<p>
+
+<b>Earbat Approval:</b>
+
+<br>
+
+Pending
+
+</p>
+
+<br>
+
+<p>
+
+<b>Reality Integrity:</b>
+
+<br>
+
+Questionable
+
+</p>
+
+<br>
+
+<hr>
+
+<br>
+
+<button onclick="showClassifiedReports()">
+
+📜 Classified Reports
+
+</button>
+
+<br><br>
+
+<button onclick="showMangoArchives()">
+
+🥭 Mango Archives
+
+</button>
+
+<br><br>
+
+<button onclick="showBreadRegistry()">
+
+🍞 Bread Registry
+
+</button>
+
+<br><br>
+
+<button onclick="showContainmentStatus()">
+
+⚠ Containment Status
+
+</button>
+
+<br><br>
+
+<button onclick="location.reload()">
+
+🔒 Exit Director Mode
 
 </button>
 
